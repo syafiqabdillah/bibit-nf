@@ -25,7 +25,7 @@
         v-for="product in computedProductList"
         :key="product.id"
         v-on:click="showDetail(product)"
-        img-src="https://picsum.photos/600/300/?image=25"
+        :img-src="product.imageUrl"
       >
         <div align="left">
           <span class="product-name">{{ product.namaProduk }}</span>
@@ -52,25 +52,28 @@ export default {
       searchQuery: "",
       productList: [
         {
-          namaProduk: "Product 123",
-          namaToko: "Toko ABC",
+          namaProduk: "Garam Himalaya",
+          namaToko: "Roemah Sehat Bontang",
           harga: "Rp 30.000",
           lokasi: "Bontang",
           id: "1",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
         },
         {
-          namaProduk: "Product 234",
-          namaToko: "Toko DEF",
+          namaProduk: "Lemonilo",
+          namaToko: "Roemah Sehat Bontang",
           harga: "Rp 40.000",
           lokasi: "Bontang",
           id: "2",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11.jpeg?alt=media&token=de2f1722-5c58-4091-ba1b-dee6088c4c04"
         },
         {
-          namaProduk: "Product 345",
-          namaToko: "Toko GHI",
+          namaProduk: "Chia Seed",
+          namaToko: "Roemah Sehat Bontang",
           harga: "Rp 50.000",
           lokasi: "Bontang",
           id: "3",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11%20(1).jpeg?alt=media&token=1cdd6b2c-cde7-4004-8f60-c8e6750f63fb"
         },
         {
           namaProduk: "Product 456",
@@ -78,6 +81,7 @@ export default {
           harga: "Rp 60.000",
           lokasi: "Bontang",
           id: "4",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
         },
         {
           namaProduk: "Product 567",
@@ -85,6 +89,7 @@ export default {
           harga: "Rp 70.000",
           lokasi: "Bontang",
           id: "5",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
         },
         {
           namaProduk: "Product 567",
@@ -92,6 +97,7 @@ export default {
           harga: "Rp 70.000",
           lokasi: "Bontang",
           id: "6",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
         },
         {
           namaProduk: "Product 567",
@@ -99,6 +105,7 @@ export default {
           harga: "Rp 70.000",
           lokasi: "Bontang",
           id: "7",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
         },
         {
           namaProduk: "Product 567",
@@ -106,6 +113,7 @@ export default {
           harga: "Rp 70.000",
           lokasi: "Bontang",
           id: "8",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
         },
         {
           namaProduk: "Product 567",
@@ -113,6 +121,7 @@ export default {
           harga: "Rp 70.000",
           lokasi: "Bontang",
           id: "9",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
         },
         {
           namaProduk: "Product 567",
@@ -120,6 +129,7 @@ export default {
           harga: "Rp 70.000",
           lokasi: "Bontang",
           id: "10",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
         },
         {
           namaProduk: "Product 567",
@@ -127,6 +137,7 @@ export default {
           harga: "Rp 70.000",
           lokasi: "Bontang",
           id: "11",
+          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
         },
       ],
       productCategory: [
@@ -145,7 +156,7 @@ export default {
   computed: {
     computedProductList() {
       return this.productList.filter((product) => {
-        return product.namaProduk.includes(this.searchQuery);
+        return product.namaProduk.toLowerCase().includes(this.searchQuery);
       });
     },
   },
@@ -190,10 +201,6 @@ export default {
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.home {
-  font-family: "Alata", Helvetica, Arial;
-  background-color: #f3e6e3;
-}
 .categories {
   display: flex;
   flex-wrap: wrap;
@@ -217,7 +224,7 @@ a:visited {
 .jumbo {
   background-color: #424874;
   padding: 32px;
-  padding-top: 64px;
+  padding-top: 32px;
   color: white;
 }
 .jumbo-title {

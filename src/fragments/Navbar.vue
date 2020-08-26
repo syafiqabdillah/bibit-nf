@@ -1,18 +1,20 @@
 <template>
   <div id="nav">
-    <b-navbar toggleable="sm" type="dark" variant="dark">
-      <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
-
-      <b-navbar-brand>BBT</b-navbar-brand>
-
-      <b-navbar-nav class="ml-auto">
-        <b-nav-item>
-          <router-link to="/">Home</router-link>
-        </b-nav-item>
-        <b-nav-item>
-          <router-link to="/about">About</router-link>
-        </b-nav-item>
-      </b-navbar-nav>
+    <b-navbar class="navbar" toggleable="sm" type="dark">
+      <b-navbar-toggle
+        class="navbar-toggle"
+        target="nav-collapse"
+      ></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item>
+            <router-link to="/">Beranda</router-link>
+          </b-nav-item>
+          <b-nav-item>
+            <router-link to="/login">Login</router-link>
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
     </b-navbar>
   </div>
 </template>
@@ -24,9 +26,13 @@ export default {
 </script>
 
 <style scoped>
+#nav {
+  background-color: #424874;
+  color: white;
+}
 #nav a {
-  font-weight: bold;
-  color: #50a3b9;
+  font-weight: normal;
+  color: #c3aed6;
 }
 
 #nav a.router-link-exact-active {

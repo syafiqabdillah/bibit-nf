@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Navbar />
     <router-view/>
   </div>
 </template>
@@ -16,9 +17,15 @@ export default {
 <style>
 #app {
   text-align: center;
+  font-family: "Alata", Helvetica, Arial;
+  background-color: #f3e6e3;
+  height: 100%;
 }
 @font-face {
   font-family: "Alata";
   src: url("./assets/fonts/Alata-Regular.ttf") format("truetype");
+}
+html, body {
+  height: 100%;
 }
 </style>
