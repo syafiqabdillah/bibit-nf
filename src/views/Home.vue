@@ -183,6 +183,7 @@ export default {
 }
 .product-item:hover {
   cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .home {
   font-family: "Alata", Helvetica, Arial;
@@ -213,11 +214,12 @@ a:visited {
   color: white;
 }
 .jumbo-title {
-  font-size: 4rem;
+  font-size: 3.5rem;
 }
 .jumbo-subtitle {
   font-size: 1.25rem;
   font-weight: 500;
   margin-bottom: 48px;
+  letter-spacing: 2px;
 }
 </style>
