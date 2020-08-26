@@ -29,7 +29,9 @@
           <span class="product-name">{{ product.namaProduk }}</span>
           <div class="product-price">{{ product.harga }}</div>
           <div class="product-store">{{ product.namaToko }}</div>
-          <div class="product-seen">Telah dilihat 45 kali</div>
+          <div class="product-seen">
+            <b-icon class="seen-icon" icon="eye-fill" ></b-icon>Telah dilihat 45 kali
+          </div>
         </div>
       </b-card>
     </div>
@@ -42,9 +44,6 @@ import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld,
-  },
   data() {
     return {
       searchQuery: "",
@@ -172,6 +171,9 @@ export default {
   font-size: 12px;
   color: #6c757d;
 }
+.seen-icon {
+  margin-right: 3px;
+}
 .product-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, 200px);
@@ -187,6 +189,7 @@ export default {
 }
 .home {
   font-family: "Alata", Helvetica, Arial;
+  background-color: #f3e6e3;
 }
 .categories {
   display: flex;
@@ -197,6 +200,7 @@ export default {
   margin-right: 12px;
   font-size: 12px;
   font-weight: 200;
+  letter-spacing: 0.5px;
 }
 .category:hover {
   color: #c3aed6;
