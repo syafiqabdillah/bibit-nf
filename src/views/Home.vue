@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="jumbo">
-      <h1 class="jumbo-title">Bantu Bisnis Teman</h1>
+      <h1 class="jumbo-title">
+        <b-icon class="title-icon" icon="cart3"></b-icon>Bantu Bisnis Teman
+      </h1>
       <p class="jumbo-subtitle">Yuk beli jualan teman!</p>
       <b-form>
         <b-form-input
@@ -30,7 +32,8 @@
           <div class="product-price">{{ product.harga }}</div>
           <div class="product-store">{{ product.namaToko }}</div>
           <div class="product-seen">
-            <b-icon class="seen-icon" icon="eye-fill" ></b-icon>Telah dilihat 45 kali
+            <b-icon class="seen-icon" icon="eye-fill"></b-icon>Telah dilihat 45
+            kali
           </div>
         </div>
       </b-card>
@@ -219,6 +222,9 @@ a:visited {
 }
 .jumbo-title {
   font-size: 3.5rem;
+}
+.title-icon {
+  margin-right: 10px;
 }
 .jumbo-subtitle {
   font-size: 1.25rem;
