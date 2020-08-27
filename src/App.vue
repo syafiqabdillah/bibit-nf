@@ -17,6 +17,9 @@ export default {
 </script>
 
 <style>
+html, body {
+  height: 100%;
+}
 #app {
   text-align: center;
   font-family: "Alata", Helvetica, Arial;

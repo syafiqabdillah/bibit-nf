@@ -7,11 +7,17 @@
       ></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
+          
+          <b-nav-item v-if="loggedIn">Halo</b-nav-item>
+
           <b-nav-item>
             <router-link to="/">Beranda</router-link>
           </b-nav-item>
-          <b-nav-item>
+          <b-nav-item v-if="!loggedIn">
             <router-link to="/login">Login</router-link>
+          </b-nav-item>
+          <b-nav-item v-on:click="logout" v-else>
+            Logout
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -20,8 +26,20 @@
 </template>
 
 <script>
+import { getCookie, checkCookie, parseJwt, setCookie } from "../mixins/index";
 export default {
   name: "Navbar",
+  computed: {
+    loggedIn() {
+      return getCookie("token") !== "";
+    },
+  },
+  methods: {
+    logout() {
+      setCookie("token", "", new Date());
+      location.href="/";
+    },
+  },
 };
 </script>
 

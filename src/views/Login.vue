@@ -8,7 +8,7 @@
     <div class="login-container">
       <b-row>
         <b-col></b-col>
-        <b-col cols="12" lg="6">
+        <b-col cols="12" md="8" lg="6">
           <div class="form-login">
             <b-card>
               <b-form @submit="onSubmit" @reset="onReset">
@@ -28,7 +28,7 @@
 
                 <b-form-group
                   id="input-group-password"
-                  label="Email address:"
+                  label="Password:"
                   label-for="input-2"
                 >
                   <b-form-input
@@ -47,10 +47,19 @@
         <b-col></b-col>
       </b-row>
     </div>
+
+    <b-modal ref="modal-loading" centered hide-footer hide-header>
+      <div align="center">
+        <b-spinner label="Spinning" class="spinner"></b-spinner>
+      </div>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import { parseJwt, setCookie } from "../mixins/index.js";
+
 export default {
   name: "Login",
   data() {
@@ -62,7 +71,24 @@ export default {
     };
   },
   methods: {
-    onSubmit() {},
+    onSubmit(e) {
+      e.preventDefault();
+      this.$refs["modal-loading"].show();
+      axios
+        .post("http://localhost:5000/login", this.form)
+        .then((res) => {
+          const jwt = res.data.jwt;
+          const data = parseJwt(jwt);
+          setCookie("token", jwt, 1);
+          location.href = "/";
+        })
+        .catch((e) => {
+          console.log(e);
+        })
+        .finally(() => {
+          this.$refs["modal-loading"].hide();
+        });
+    },
     onReset() {},
   },
 };
@@ -95,5 +121,8 @@ export default {
 }
 .login-container {
   margin: 32px;
+}
+.spinner {
+  color: #c3aed6;
 }
 </style>

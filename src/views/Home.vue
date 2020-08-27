@@ -29,7 +29,7 @@
       >
         <div align="left">
           <span class="product-name">{{ product.namaProduk }}</span>
-          <div class="product-price">{{ product.harga }}</div>
+          <div class="product-price">{{ product.harga > 0 ? 'Rp ' + priceFormat(product.harga) : "Tanya penjual" }}</div>
           <div class="product-store">{{ product.namaToko }}</div>
           <div class="product-seen">
             <b-icon class="seen-icon" icon="eye-fill"></b-icon>Telah dilihat 45
@@ -54,7 +54,7 @@ export default {
         {
           namaProduk: "Garam Himalaya",
           namaToko: "Roemah Sehat Bontang",
-          harga: "Rp 30.000",
+          harga: 0,
           lokasi: "Bontang",
           id: "1",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
@@ -62,7 +62,7 @@ export default {
         {
           namaProduk: "Lemonilo",
           namaToko: "Roemah Sehat Bontang",
-          harga: "Rp 40.000",
+          harga: 0,
           lokasi: "Bontang",
           id: "2",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11.jpeg?alt=media&token=de2f1722-5c58-4091-ba1b-dee6088c4c04"
@@ -70,7 +70,7 @@ export default {
         {
           namaProduk: "Chia Seed",
           namaToko: "Roemah Sehat Bontang",
-          harga: "Rp 50.000",
+          harga: 0,
           lokasi: "Bontang",
           id: "3",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11%20(1).jpeg?alt=media&token=1cdd6b2c-cde7-4004-8f60-c8e6750f63fb"
@@ -78,7 +78,7 @@ export default {
         {
           namaProduk: "Product 456",
           namaToko: "Toko JKL",
-          harga: "Rp 60.000",
+          harga: 60000,
           lokasi: "Bontang",
           id: "4",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
@@ -86,7 +86,7 @@ export default {
         {
           namaProduk: "Product 567",
           namaToko: "Toko MNO",
-          harga: "Rp 70.000",
+          harga: 70000,
           lokasi: "Bontang",
           id: "5",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
@@ -94,7 +94,7 @@ export default {
         {
           namaProduk: "Product 567",
           namaToko: "Toko MNO",
-          harga: "Rp 70.000",
+          harga: 70000,
           lokasi: "Bontang",
           id: "6",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
@@ -102,7 +102,7 @@ export default {
         {
           namaProduk: "Product 567",
           namaToko: "Toko MNO",
-          harga: "Rp 70.000",
+          harga: 70000,
           lokasi: "Bontang",
           id: "7",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
@@ -110,7 +110,7 @@ export default {
         {
           namaProduk: "Product 567",
           namaToko: "Toko MNO",
-          harga: "Rp 70.000",
+          harga: 70000,
           lokasi: "Bontang",
           id: "8",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
@@ -118,7 +118,7 @@ export default {
         {
           namaProduk: "Product 567",
           namaToko: "Toko MNO",
-          harga: "Rp 70.000",
+          harga: 70000,
           lokasi: "Bontang",
           id: "9",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
@@ -126,7 +126,7 @@ export default {
         {
           namaProduk: "Product 567",
           namaToko: "Toko MNO",
-          harga: "Rp 70.000",
+          harga: 70000,
           lokasi: "Bontang",
           id: "10",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
@@ -134,7 +134,7 @@ export default {
         {
           namaProduk: "Product 567",
           namaToko: "Toko MNO",
-          harga: "Rp 70.000",
+          harga: 70000,
           lokasi: "Bontang",
           id: "11",
           imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
@@ -156,7 +156,9 @@ export default {
   computed: {
     computedProductList() {
       return this.productList.filter((product) => {
-        return product.namaProduk.toLowerCase().includes(this.searchQuery);
+        const queryInNamaProduk = product.namaProduk.toLowerCase().includes(this.searchQuery);
+        const queryInNamaToko = product.namaToko.toLowerCase().includes(this.searchQuery);
+        return queryInNamaProduk || queryInNamaToko;
       });
     },
   },
@@ -164,6 +166,9 @@ export default {
     showDetail(product) {
       console.log(product);
     },
+    priceFormat(price) {
+      return new Intl.NumberFormat().format(price)
+    }
   },
 };
 </script>
@@ -198,7 +203,7 @@ export default {
   margin-top: 20px;
 }
 .product-item {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .product-item:hover {
   cursor: pointer;
