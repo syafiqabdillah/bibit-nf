@@ -192,7 +192,10 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, 200px);
   justify-content: space-around;
-  margin: 20px;
+  padding-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
 }
 .product-item {
   margin-bottom: 10px;

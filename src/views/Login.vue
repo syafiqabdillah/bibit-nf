@@ -1,46 +1,52 @@
 <template>
   <div class="login">
-    <h1 class="title">Login</h1>
-    <b-row>
-      <b-col></b-col>
-      <b-col cols="12" lg="6">
-        <div class="form-login">
-          <b-card>
-            <b-form @submit="onSubmit" @reset="onReset">
-              <b-form-group
-                id="input-group-email"
-                label="Email address:"
-                label-for="input-1"
-              >
-                <b-form-input
-                  id="input-1"
-                  v-model="form.email"
-                  type="email"
-                  required
-                  placeholder="Enter email"
-                ></b-form-input>
-              </b-form-group>
+    <div class="jumbo">
+      <h1 class="jumbo-title">
+        Login
+      </h1>
+    </div>
+    <div class="login-container">
+      <b-row>
+        <b-col></b-col>
+        <b-col cols="12" lg="6">
+          <div class="form-login">
+            <b-card>
+              <b-form @submit="onSubmit" @reset="onReset">
+                <b-form-group
+                  id="input-group-email"
+                  label="Email address:"
+                  label-for="input-1"
+                >
+                  <b-form-input
+                    id="input-1"
+                    v-model="form.email"
+                    type="email"
+                    required
+                    placeholder="Enter email"
+                  ></b-form-input>
+                </b-form-group>
 
-              <b-form-group
-                id="input-group-password"
-                label="Email address:"
-                label-for="input-2"
-              >
-                <b-form-input
-                  id="input-2"
-                  v-model="form.password"
-                  type="password"
-                  required
-                  placeholder="Your password"
-                ></b-form-input>
-              </b-form-group>
-              <b-button class="btn-login" block type="submit">Login</b-button>
-            </b-form>
-          </b-card>
-        </div>
-      </b-col>
-      <b-col></b-col>
-    </b-row>
+                <b-form-group
+                  id="input-group-password"
+                  label="Email address:"
+                  label-for="input-2"
+                >
+                  <b-form-input
+                    id="input-2"
+                    v-model="form.password"
+                    type="password"
+                    required
+                    placeholder="Your password"
+                  ></b-form-input>
+                </b-form-group>
+                <b-button class="btn-login" block type="submit">Login</b-button>
+              </b-form>
+            </b-card>
+          </div>
+        </b-col>
+        <b-col></b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
@@ -55,6 +61,10 @@ export default {
       },
     };
   },
+  methods: {
+    onSubmit() {},
+    onReset() {},
+  },
 };
 </script>
 
@@ -62,14 +72,28 @@ export default {
 .title {
   margin: 32px;
 }
-.login {
-  min-height: 100%;
-}
 .form-login {
   text-align: left;
 }
 .btn-login {
   background-color: #c3aed6;
   border: 0;
+  margin-top: 32px;
+  font-size: 1.5rem;
+}
+.btn-login:hover {
+  background-color: #424874;
+}
+.jumbo {
+  background-color: #424874;
+  padding: 32px;
+  padding-top: 32px;
+  color: white;
+}
+.jumbo-title {
+  font-size: 3.5rem;
+}
+.login-container {
+  margin: 32px;
 }
 </style>
