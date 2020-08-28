@@ -110,6 +110,9 @@ export default {
 .btn-login:hover {
   background-color: #424874;
 }
+.btn-login:active {
+  background-color: #e11d74;
+}
 .jumbo {
   background-color: #424874;
   padding: 32px;
