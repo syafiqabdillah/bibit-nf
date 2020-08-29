@@ -2,13 +2,13 @@
   <div class="profile">
     <div class="jumbo">
       <h1 class="jumbo-title">
-        Profile Toko
+        Profile Toko <br/> "{{profile.nama }}"
       </h1>
     </div>
 
-    <div class="login-container">
+    <div class="profile-container">
       <b-row>
-        <b-col cols="4">
+        <b-col cols="12" md="4" lg="4">
           <div class="my-shop">
             <b-card>
 
@@ -96,7 +96,7 @@
             </b-card>
           </div>
         </b-col>
-        <b-col cols="8">
+        <b-col cols="12" md="8" lg="8">
           <div class="form-login">
             <b-card> </b-card>
           </div>
@@ -112,7 +112,7 @@ export default {
   data() {
     return {
       profile: {
-        nama: "Toko Kita Maju",
+        nama: "CV Maju Jalan",
         alamat: "Jl. Jalan No. 69",
         noHp: "0812345678909",
         tokopedia: "https://www.tokopedia.com/enterkomputer",
@@ -134,6 +134,9 @@ export default {
 </script>
 
 <style>
+.my-shop {
+  margin-bottom: 16px;
+}
 .profile-toko {
   margin-top: 16px;
 }
@@ -145,14 +148,14 @@ export default {
 }
 .jumbo {
   background-color: #424874;
-  padding: 32px;
-  padding-top: 32px;
+  padding-bottom: 32px;
+  padding-top: 16px;
   color: white;
 }
 .jumbo-title {
   font-size: 3.5rem;
 }
-.login-container {
+.profile-container {
   margin: 32px;
 }
 .btn-update {
