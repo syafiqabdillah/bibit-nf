@@ -114,13 +114,13 @@
               <div class="product-container">
                 <b-card
                   class="product-item"
-                  v-for="product in productList"
+                  v-for="product in listProduct"
                   :key="product.id"
                   v-on:click="showDetail(product)"
                   :img-src="product.imageUrl"
                 >
                   <div align="left">
-                    <span class="product-name">{{ product.namaProduk }}</span>
+                    <span class="product-name">{{ product.nama }}</span>
                     <div class="product-price">
                       {{
                         product.harga > 0
@@ -128,7 +128,6 @@
                           : "Tanya penjual"
                       }}
                     </div>
-                    <div class="product-store">{{ product.namaToko }}</div>
                     <div class="product-seen">
                       <b-icon class="seen-icon" icon="eye-fill"></b-icon>Telah
                       dilihat 45 kali
@@ -245,6 +244,7 @@ export default {
         harga: "",
         image: null,
       },
+      listProduct: [],
       productList: [
         {
           namaProduk: "Garam Himalaya",
@@ -317,11 +317,20 @@ export default {
         .get(`http://localhost:5000/toko/${user_id}`)
         .then((res) => {
           this.profile = res.data.data;
-          console.log(parseJwt(token))
           this.profile.toko_id = toko_id;
         })
         .catch((e) => {
           console.log(e);
+        });
+
+      // get produk
+      axios
+        .get(`http://localhost:5000/products/${toko_id}`)
+        .then((res) => {
+          this.listProduct = res.data.data;
+        })
+        .catch((e) => {
+          alert(e);
         });
     }
   },
@@ -378,24 +387,25 @@ export default {
                 this.uploadProgress.state = "Adding Product to Database";
                 this.uploadProgress.imageUrl = url;
                 // add product to database
-                axios.post("http://localhost:5000/add-product", {
-                  toko_id: this.profile.toko_id,
-                  nama: this.formAddProduct.namaProduk,
-                  harga: this.formAddProduct.harga,
-                  imageUrl: url
-                })
-                .then(res => {
-                  console.log(res.data);
-                  alert("successfully adding product")
-                })
-                .catch(e => {
-                  console.log(e)
-                  alert("adding product failed")
-                })
-                .finally(()=>{
-                  this.$refs["modal-uploading"].hide();
-                  location.reload()
-                })
+                axios
+                  .post("http://localhost:5000/add-product", {
+                    toko_id: this.profile.toko_id,
+                    nama: this.formAddProduct.namaProduk,
+                    harga: this.formAddProduct.harga,
+                    imageUrl: url,
+                  })
+                  .then((res) => {
+                    console.log(res.data);
+                    alert("successfully adding product");
+                  })
+                  .catch((e) => {
+                    console.log(e);
+                    alert("adding product failed");
+                  })
+                  .finally(() => {
+                    this.$refs["modal-uploading"].hide();
+                    location.reload();
+                  });
               });
           }
         );
@@ -407,11 +417,9 @@ export default {
     showFormAddProduct() {
       this.$refs["modal-add-product"].show();
     },
-    resetModal() {
-      this.formAddProduct.namaProduk = "";
-      this.formAddProduct.namaToko = "";
-      this.formAddProduct.harga = "";
-    },
+    priceFormat(price) {
+      return new Intl.NumberFormat().format(price)
+    }
   },
   computed: {
     imagePreviewUrl() {
@@ -524,5 +532,4 @@ export default {
 .spinner {
   color: #c3aed6;
 }
-
 </style>

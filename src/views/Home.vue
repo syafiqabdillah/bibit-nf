@@ -25,7 +25,7 @@
         v-for="product in computedProductList"
         :key="product.id"
         v-on:click="showDetail(product)"
-        :img-src="product.imageUrl"
+        img-src="https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman-fd669.appspot.com/o/images%2F1598765377250-43y1yk.jpg?alt=media&token=b7925eb3-6bef-4b5a-9bf4-1ae459ed62ae"
       >
         <div align="left">
           <span class="product-name">{{ product.namaProduk }}</span>
