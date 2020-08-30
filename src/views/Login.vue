@@ -94,7 +94,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="css" scoped>
 .title {
   margin: 32px;
 }

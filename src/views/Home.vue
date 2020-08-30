@@ -116,7 +116,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="css" scoped>
 .product-price {
   font-size: 14px;
   font-weight: bold;
@@ -158,7 +158,7 @@ export default {
   display: flex;
   justify-content: center;
   height: 150px;
-  background-color: green;
+  background-color: white;
 }
 .product-img-container img {
   object-fit: cover;

@@ -386,7 +386,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="css" scoped>
 /* Modal */
 #image-preview {
   display: flex;
@@ -444,7 +444,7 @@ export default {
 /* List Produk */
 .product-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 170px); 
+  grid-template-columns: repeat(auto-fill, 150px); 
   justify-content: space-between;
   column-gap: 4px;
   margin: 20px;
@@ -458,14 +458,13 @@ export default {
 /* Gambar dalam item */
 .product-img-container {
   display: flex;
-  justify-content: center;
   height: 150px;
-  background-color: green;
+  justify-content: center;
+  background-color: white;
 }
 .product-img-container img {
   object-fit: cover;
   width: 100%;
-  max-height: 150px;
 }
 /* Supaya card bootstrapnya gaada padding */
 .card-body {
