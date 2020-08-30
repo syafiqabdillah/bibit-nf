@@ -145,9 +145,7 @@
     <b-modal
       ref="modal-add-product"
       title="Tambah Produk"
-      @show="resetModal"
       @ok="onSubmit"
-      @cancel="resetModal"
       centered
     >
       <div align="center">
@@ -180,7 +178,7 @@
           <b-form-group
             label-cols="4"
             label-cols-lg="3"
-            label="Harga"
+            label="Gambar"
             label-for="add-produk-image"
           >
             <b-form-file
@@ -190,18 +188,30 @@
               placeholder="Pilih gambar..."
               drop-placeholder="Taruh gambar..."
             ></b-form-file>
+            <div id="image-preview">
+              <img
+                :src="imagePreviewUrl"
+                v-if="formAddProduct.image !== null"
+                alt="Image preview"
+              />
+            </div>
           </b-form-group>
         </b-form>
       </div>
     </b-modal>
 
     <b-modal ref="modal-uploading" centered hide-header hide-footer>
-      <b-spinner>{{ uploadProgress.state }}</b-spinner>
+      <div align="center">
+        <b-spinner class="spinner">{{ uploadProgress.state }}</b-spinner>
+        <p v-if="uploadProgress.state === 'Uploading Image'">
+          Uploaded {{ uploadProgress.percentage }}%
+        </p>
+      </div>
     </b-modal>
 
     <b-modal ref="update-toko" centered hide-header hide-footer>
       <div align="center">
-        <b-spinner>Update Toko...</b-spinner>
+        <b-spinner class="spinner">Update Toko...</b-spinner>
       </div>
     </b-modal>
   </div>
@@ -306,8 +316,8 @@ export default {
       axios
         .get(`http://localhost:5000/toko/${user_id}`)
         .then((res) => {
-          // console.log(res.data.data)
           this.profile = res.data.data;
+          console.log(parseJwt(token))
           this.profile.toko_id = toko_id;
         })
         .catch((e) => {
@@ -335,29 +345,61 @@ export default {
     },
     onSubmit(e) {
       e.preventDefault();
-      const imageName = `${Date.now()}-${this.formAddProduct.image.name}`;
-      const uploadTask = storage
-        .ref(`images/${imageName}`)
-        .put(this.formAddProduct.image);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          this.uploadProgress.percentage =
-            (snapshot.bytesTransferred * 100) / snapshot.totalBytes;
-        },
-        (error) => {
-          alert(error);
-        },
-        () => {
-          storage
-            .ref("images")
-            .child(imageName)
-            .getDownloadURL()
-            .then((url) => {
-              this.uploadProgress.imageUrl = url;
-            });
-        }
-      );
+      console.log(this.formAddProduct);
+      if (
+        this.formAddProduct.namaProduk !== "" &&
+        this.formAddProduct.harga !== "" &&
+        this.formAddProduct.image !== null
+      ) {
+        // show modal spinner for uploading image
+        this.uploadProgress.state = "Uploading Image";
+        this.$refs["modal-uploading"].show();
+
+        const imageName = `${Date.now()}-${this.formAddProduct.image.name}`;
+        const uploadTask = storage
+          .ref(`images/${imageName}`)
+          .put(this.formAddProduct.image);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            this.uploadProgress.percentage =
+              (snapshot.bytesTransferred * 100) / snapshot.totalBytes;
+          },
+          (error) => {
+            alert(error);
+          },
+          () => {
+            storage
+              .ref("images")
+              .child(imageName)
+              .getDownloadURL()
+              .then((url) => {
+                console.log(url);
+                this.uploadProgress.state = "Adding Product to Database";
+                this.uploadProgress.imageUrl = url;
+                // add product to database
+                axios.post("http://localhost:5000/add-product", {
+                  toko_id: this.profile.toko_id,
+                  nama: this.formAddProduct.namaProduk,
+                  harga: this.formAddProduct.harga,
+                  imageUrl: url
+                })
+                .then(res => {
+                  console.log(res.data);
+                  alert("successfully adding product")
+                })
+                .catch(e => {
+                  console.log(e)
+                  alert("adding product failed")
+                })
+                .finally(()=>{
+                  this.$refs["modal-uploading"].hide();
+                  location.reload()
+                })
+              });
+          }
+        );
+      }
     },
     onReset(e) {
       e.preventDefault();
@@ -371,10 +413,26 @@ export default {
       this.formAddProduct.harga = "";
     },
   },
+  computed: {
+    imagePreviewUrl() {
+      if (this.formAddProduct.image) {
+        return URL.createObjectURL(this.formAddProduct.image);
+      }
+      return null;
+    },
+  },
 };
 </script>
 
 <style>
+#image-preview {
+  display: flex;
+  margin-top: 8px;
+}
+#image-preview img {
+  height: 150px;
+  width: auto;
+}
 .upload-file {
   text-align: left;
 }
@@ -463,4 +521,8 @@ export default {
 .btn-update:active {
   background-color: #424874;
 }
+.spinner {
+  color: #c3aed6;
+}
+
 </style>
