@@ -11,99 +11,102 @@
     <div class="profile-container">
       <b-row>
         <b-col cols="12" md="4" lg="4">
-          <div class="my-shop">
+          <div>
             <b-card>
-              <b-img
-                src="https://placekitten.com/300/300"
-                height="150px"
-                alt="Responsive image"
-              ></b-img>
-
               <div class="profile-toko">
-                <b-form @submit="updateToko">
-                  <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label="Nama"
-                    label-for="profile-nama-toko"
-                  >
-                    <b-form-input
-                      id="profile-nama-toko"
-                      v-model="profile.nama"
-                    ></b-form-input>
-                  </b-form-group>
+                <b-img
+                  src="https://placekitten.com/300/300"
+                  height="150px"
+                  alt="Responsive image"
+                  id="avatar-toko"
+                ></b-img>
 
-                  <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label="Alamat"
-                    label-for="profile-alamat-toko"
-                  >
-                    <b-form-input
-                      id="profile-alamat-toko"
-                      v-model="profile.alamat"
-                    ></b-form-input>
-                  </b-form-group>
+                <div>
+                  <b-form @submit="updateToko">
+                    <b-form-group
+                      label-cols="4"
+                      label-cols-lg="3"
+                      label="Nama"
+                      label-for="profile-nama-toko"
+                    >
+                      <b-form-input
+                        id="profile-nama-toko"
+                        v-model="profile.nama"
+                      ></b-form-input>
+                    </b-form-group>
 
-                  <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label="No HP"
-                    label-for="profile-hp-toko"
-                  >
-                    <b-form-input
-                      id="profile-hp-toko"
-                      v-model="profile.nohp"
-                    ></b-form-input>
-                  </b-form-group>
+                    <b-form-group
+                      label-cols="4"
+                      label-cols-lg="3"
+                      label="Alamat"
+                      label-for="profile-alamat-toko"
+                    >
+                      <b-form-input
+                        id="profile-alamat-toko"
+                        v-model="profile.alamat"
+                      ></b-form-input>
+                    </b-form-group>
 
-                  <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label="Shopee"
-                    label-for="profile-shopee-toko"
-                  >
-                    <b-form-input
-                      id="profile-shopee-toko"
-                      v-model="profile.shopee"
-                    ></b-form-input>
-                  </b-form-group>
+                    <b-form-group
+                      label-cols="4"
+                      label-cols-lg="3"
+                      label="No HP"
+                      label-for="profile-hp-toko"
+                    >
+                      <b-form-input
+                        id="profile-hp-toko"
+                        v-model="profile.nohp"
+                      ></b-form-input>
+                    </b-form-group>
 
-                  <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label="Tokopedia"
-                    label-for="profile-tokopedia-toko"
-                  >
-                    <b-form-input
-                      id="profile-tokopedia-toko"
-                      v-model="profile.tokopedia"
-                    ></b-form-input>
-                  </b-form-group>
+                    <b-form-group
+                      label-cols="4"
+                      label-cols-lg="3"
+                      label="Shopee"
+                      label-for="profile-shopee-toko"
+                    >
+                      <b-form-input
+                        id="profile-shopee-toko"
+                        v-model="profile.shopee"
+                      ></b-form-input>
+                    </b-form-group>
 
-                  <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label="Instagram"
-                    label-for="profile-instagram-toko"
-                  >
-                    <b-form-input
-                      id="profile-instagram-toko"
-                      v-model="profile.instagram"
-                    ></b-form-input>
-                  </b-form-group>
+                    <b-form-group
+                      label-cols="4"
+                      label-cols-lg="3"
+                      label="Tokopedia"
+                      label-for="profile-tokopedia-toko"
+                    >
+                      <b-form-input
+                        id="profile-tokopedia-toko"
+                        v-model="profile.tokopedia"
+                      ></b-form-input>
+                    </b-form-group>
 
-                  <b-button class="btn-update" block type="submit"
-                    >Update Toko</b-button
-                  >
-                </b-form>
+                    <b-form-group
+                      label-cols="4"
+                      label-cols-lg="3"
+                      label="Instagram"
+                      label-for="profile-instagram-toko"
+                    >
+                      <b-form-input
+                        id="profile-instagram-toko"
+                        v-model="profile.instagram"
+                      ></b-form-input>
+                    </b-form-group>
+
+                    <b-button class="btn-update" block type="submit"
+                      >Update Toko</b-button
+                    >
+                  </b-form>
+                </div>
               </div>
             </b-card>
           </div>
         </b-col>
 
         <b-col cols="12" md="8" lg="8">
-          <div class="product-list">
+          <div>
             <b-card>
               <div align="center">
                 <b-button class="add-product" v-on:click="showFormAddProduct()">
@@ -111,15 +114,19 @@
                   Produk
                 </b-button>
               </div>
+
               <div class="product-container">
                 <b-card
                   class="product-item"
                   v-for="product in listProduct"
                   :key="product.id"
                   v-on:click="showDetail(product)"
-                  :img-src="product.imageUrl"
                 >
-                  <div align="left">
+                  <div class="product-img-container">
+                    <img :src="product.imageUrl" :alt="product.nama" />
+                  </div>
+
+                  <div align="left" id="product-detail">
                     <span class="product-name">{{ product.nama }}</span>
                     <div class="product-price">
                       {{
@@ -245,62 +252,7 @@ export default {
         image: null,
       },
       listProduct: [],
-      productList: [
-        {
-          namaProduk: "Garam Himalaya",
-          namaToko: "Roemah Sehat Bontang",
-          harga: 0,
-          lokasi: "Bontang",
-          id: "1",
-          imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753",
-        },
-        {
-          namaProduk: "Lemonilo",
-          namaToko: "Roemah Sehat Bontang",
-          harga: 0,
-          lokasi: "Bontang",
-          id: "2",
-          imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11.jpeg?alt=media&token=de2f1722-5c58-4091-ba1b-dee6088c4c04",
-        },
-        {
-          namaProduk: "Chia Seed",
-          namaToko: "Roemah Sehat Bontang",
-          harga: 0,
-          lokasi: "Bontang",
-          id: "3",
-          imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11%20(1).jpeg?alt=media&token=1cdd6b2c-cde7-4004-8f60-c8e6750f63fb",
-        },
-        {
-          namaProduk: "Garam Himalaya",
-          namaToko: "Roemah Sehat Bontang",
-          harga: 0,
-          lokasi: "Bontang",
-          id: "4",
-          imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753",
-        },
-        {
-          namaProduk: "Lemonilo",
-          namaToko: "Roemah Sehat Bontang",
-          harga: 0,
-          lokasi: "Bontang",
-          id: "5",
-          imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11.jpeg?alt=media&token=de2f1722-5c58-4091-ba1b-dee6088c4c04",
-        },
-        {
-          namaProduk: "Chia Seed",
-          namaToko: "Roemah Sehat Bontang",
-          harga: 0,
-          lokasi: "Bontang",
-          id: "6",
-          imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11%20(1).jpeg?alt=media&token=1cdd6b2c-cde7-4004-8f60-c8e6750f63fb",
-        },
-      ],
+      productList: [],
     };
   },
   created() {
@@ -396,7 +348,6 @@ export default {
                   })
                   .then((res) => {
                     console.log(res.data);
-                    alert("successfully adding product");
                   })
                   .catch((e) => {
                     console.log(e);
@@ -418,8 +369,11 @@ export default {
       this.$refs["modal-add-product"].show();
     },
     priceFormat(price) {
-      return new Intl.NumberFormat().format(price)
-    }
+      if (price !== "0") {
+        return new Intl.NumberFormat().format(price);
+      }
+      return "Tanya penjual";
+    },
   },
   computed: {
     imagePreviewUrl() {
@@ -433,6 +387,7 @@ export default {
 </script>
 
 <style>
+/* Modal */
 #image-preview {
   display: flex;
   margin-top: 8px;
@@ -444,36 +399,88 @@ export default {
 .upload-file {
   text-align: left;
 }
-.add-product {
-  width: 50%;
+/* Profile Toko (sebelah kiri) */
+.profile-container {
+  margin: 32px;
+}
+.profile-toko {
+  margin: 32px;
+}
+#avatar-toko {
+  margin-bottom: 20px;
+}
+.btn-update {
   background-color: #424874;
   color: white;
   margin-top: 8px;
   border: 0px;
 }
+.btn-update:hover {
+  background-color: #e11d74;
+}
+.btn-update:active {
+  background-color: #424874;
+}
+.spinner {
+  color: #c3aed6;
+}
+/* List Product (sebelah kanan) */
+
+/* Tombol Tambah Produk */
+.add-product,
 .add-product:active,
 .add-product:active,
 .add-product:focus {
+  width: 50%;
   background-color: #424874;
+  color: white;
+  margin-top: 20px;
+  border: 0px;
 }
 .add-product:hover {
   background-color: #e11d74;
 }
+
+/* List Produk */
 .product-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 170px);
+  grid-template-columns: repeat(auto-fill, 170px); 
   justify-content: space-between;
-  padding-bottom: 20px;
   column-gap: 4px;
-  margin-top: 20px;
+  margin: 20px;
+  margin-left: 32px;
+  margin-right: 32px;
 }
+/* Item */
 .product-item {
   margin-bottom: 20px;
 }
+/* Gambar dalam item */
+.product-img-container {
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  background-color: green;
+}
+.product-img-container img {
+  object-fit: cover;
+  width: 100%;
+  max-height: 150px;
+}
+/* Supaya card bootstrapnya gaada padding */
+.card-body {
+  padding: 0px;
+}
+/* Isi tulisan dalam item */
+#product-detail {
+  padding: 20px;
+}
+/* Efek hover item  */
 .product-item:hover {
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+/* Tulisan-tulisan dalam detail item */
 .product-price {
   font-size: 14px;
   font-weight: bold;
@@ -493,18 +500,7 @@ export default {
 .seen-icon {
   margin-right: 3px;
 }
-.my-shop {
-  margin-bottom: 16px;
-}
-.profile-toko {
-  margin-top: 16px;
-}
-.profile-input {
-  margin-left: 4px;
-}
-.avatar-toko {
-  border: 0px;
-}
+/* Header */
 .jumbo {
   background-color: #424874;
   padding-bottom: 32px;
@@ -514,22 +510,5 @@ export default {
 .jumbo-title {
   font-size: 3.5rem;
 }
-.profile-container {
-  margin: 32px;
-}
-.btn-update {
-  background-color: #424874;
-  color: white;
-  margin-top: 8px;
-  border: 0px;
-}
-.btn-update:hover {
-  background-color: #e11d74;
-}
-.btn-update:active {
-  background-color: #424874;
-}
-.spinner {
-  color: #c3aed6;
-}
+
 </style>

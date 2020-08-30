@@ -25,11 +25,24 @@
         v-for="product in computedProductList"
         :key="product.id"
         v-on:click="showDetail(product)"
-        img-src="https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman-fd669.appspot.com/o/images%2F1598765377250-43y1yk.jpg?alt=media&token=b7925eb3-6bef-4b5a-9bf4-1ae459ed62ae"
       >
-        <div align="left">
+      <div class="product-img-container">
+        <img
+          :src="product.imageUrl"
+          :alt="product.namaProduk"
+        />
+      </div>
+        
+
+        <div align="left" id="product-detail">
           <span class="product-name">{{ product.namaProduk }}</span>
-          <div class="product-price">{{ product.harga > 0 ? 'Rp ' + priceFormat(product.harga) : "Tanya penjual" }}</div>
+          <div class="product-price">
+            {{
+              product.harga > 0
+                ? "Rp " + priceFormat(product.harga)
+                : "Tanya penjual"
+            }}
+          </div>
           <div class="product-store">{{ product.namaToko }}</div>
           <div class="product-seen">
             <b-icon class="seen-icon" icon="eye-fill"></b-icon>Telah dilihat 45
@@ -38,109 +51,21 @@
         </div>
       </b-card>
     </div>
-    
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import axios from 'axios';
 
 export default {
   name: "Home",
   data() {
     return {
+      listProduct: [],
       searchQuery: "",
-      productList: [
-        {
-          namaProduk: "Garam Himalaya",
-          namaToko: "Roemah Sehat Bontang",
-          harga: 0,
-          lokasi: "Bontang",
-          id: "1",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
-        },
-        {
-          namaProduk: "Lemonilo",
-          namaToko: "Roemah Sehat Bontang",
-          harga: 0,
-          lokasi: "Bontang",
-          id: "2",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11.jpeg?alt=media&token=de2f1722-5c58-4091-ba1b-dee6088c4c04"
-        },
-        {
-          namaProduk: "Chia Seed",
-          namaToko: "Roemah Sehat Bontang",
-          harga: 0,
-          lokasi: "Bontang",
-          id: "3",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.11%20(1).jpeg?alt=media&token=1cdd6b2c-cde7-4004-8f60-c8e6750f63fb"
-        },
-        {
-          namaProduk: "Product 456",
-          namaToko: "Toko JKL",
-          harga: 60000,
-          lokasi: "Bontang",
-          id: "4",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
-        },
-        {
-          namaProduk: "Product 567",
-          namaToko: "Toko MNO",
-          harga: 70000,
-          lokasi: "Bontang",
-          id: "5",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
-        },
-        {
-          namaProduk: "Product 567",
-          namaToko: "Toko MNO",
-          harga: 70000,
-          lokasi: "Bontang",
-          id: "6",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
-        },
-        {
-          namaProduk: "Product 567",
-          namaToko: "Toko MNO",
-          harga: 70000,
-          lokasi: "Bontang",
-          id: "7",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
-        },
-        {
-          namaProduk: "Product 567",
-          namaToko: "Toko MNO",
-          harga: 70000,
-          lokasi: "Bontang",
-          id: "8",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
-        },
-        {
-          namaProduk: "Product 567",
-          namaToko: "Toko MNO",
-          harga: 70000,
-          lokasi: "Bontang",
-          id: "9",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
-        },
-        {
-          namaProduk: "Product 567",
-          namaToko: "Toko MNO",
-          harga: 70000,
-          lokasi: "Bontang",
-          id: "10",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
-        },
-        {
-          namaProduk: "Product 567",
-          namaToko: "Toko MNO",
-          harga: 70000,
-          lokasi: "Bontang",
-          id: "11",
-          imageUrl: "https://firebasestorage.googleapis.com/v0/b/bantu-bisnis-teman.appspot.com/o/WhatsApp%20Image%202020-08-26%20at%2019.49.12.jpeg?alt=media&token=fb6b8d98-03ef-4399-bd01-e1b368080753"
-        },
-      ],
+      productList: [],
       productCategory: [
         "All",
         "Makanan & Minuman",
@@ -154,11 +79,25 @@ export default {
       ],
     };
   },
+  created() {
+    axios.get('http://localhost:5000/products')
+    .then(res => {
+      this.productList = res.data.data;
+    })
+    .catch(e => {
+      alert(e)
+    })
+
+  },
   computed: {
     computedProductList() {
       return this.productList.filter((product) => {
-        const queryInNamaProduk = product.namaProduk.toLowerCase().includes(this.searchQuery);
-        const queryInNamaToko = product.namaToko.toLowerCase().includes(this.searchQuery);
+        const queryInNamaProduk = product.namaProduk
+          .toLowerCase()
+          .includes(this.searchQuery);
+        const queryInNamaToko = product.namaToko
+          .toLowerCase()
+          .includes(this.searchQuery);
         return queryInNamaProduk || queryInNamaToko;
       });
     },
@@ -168,8 +107,11 @@ export default {
       console.log(product);
     },
     priceFormat(price) {
-      return new Intl.NumberFormat().format(price)
-    }
+      if (price !== "0") {
+        return new Intl.NumberFormat().format(price);
+      }
+      return "Tanya penjual";
+    },
   },
 };
 </script>
@@ -205,6 +147,23 @@ export default {
 }
 .product-item {
   margin-bottom: 20px;
+}
+#product-detail {
+  padding: 20px;
+}
+.card-body {
+  padding: 0px;
+}
+.product-img-container {
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  background-color: green;
+}
+.product-img-container img {
+  object-fit: cover;
+  width: 100%;
+  max-height: 150px;
 }
 .product-item:hover {
   cursor: pointer;
