@@ -7,18 +7,21 @@
       ></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
-          
-          <b-nav-item class="greetings" v-if="loggedIn">
+          <b-nav-item class="greetings" v-if="isLoggedIn()">
             <router-link to="/profile">Halo, {{ nama }}</router-link>
           </b-nav-item>
 
-          <b-nav-item v-if="loggedIn">|</b-nav-item>
+          <b-nav-item v-if="isLoggedIn()">|</b-nav-item>
 
           <b-nav-item>
             <router-link to="/">Beranda</router-link>
           </b-nav-item>
 
-          <b-nav-item v-if="!loggedIn">
+          <b-nav-item v-if="!isLoggedIn()">
+            <router-link to="/register">Register</router-link>
+          </b-nav-item>
+
+          <b-nav-item v-if="!isLoggedIn()">
             <router-link to="/login">Login</router-link>
           </b-nav-item>
 
@@ -32,15 +35,18 @@
 </template>
 
 <script>
-import { getCookie, checkCookie, parseJwt, setCookie } from "../mixins/index";
+import {
+  getCookie,
+  checkCookie,
+  parseJwt,
+  setCookie,
+  isLoggedIn,
+} from "../mixins/index";
 export default {
   name: "Navbar",
   computed: {
-    loggedIn() {
-      return getCookie("token") !== "";
-    },
     nama() {
-      if (this.loggedIn) {
+      if (isLoggedIn()) {
         return parseJwt(getCookie("token"))["nama"];
       }
     },
@@ -50,6 +56,9 @@ export default {
       setCookie("token", "", new Date());
       location.href = "/";
     },
+    isLoggedIn() {
+      return isLoggedIn();
+    }
   },
 };
 </script>

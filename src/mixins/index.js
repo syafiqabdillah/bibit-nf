@@ -29,4 +29,8 @@ function getCookie(cname) {
   return "";
 }
 
-export { parseJwt, setCookie, getCookie };
+function isLoggedIn() {
+  return getCookie("token") !== "";
+}
+
+export { parseJwt, setCookie, getCookie, isLoggedIn };
