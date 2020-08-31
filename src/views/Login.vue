@@ -1,16 +1,15 @@
 <template>
   <div class="login">
-    <div class="jumbo">
-      <h1 class="jumbo-title">
-        Login
-      </h1>
-    </div>
     <div class="login-container">
       <b-row>
-        <b-col></b-col>
-        <b-col cols="12" md="8" lg="6">
-          <div class="form-login">
-            <b-card>
+        <b-col cols="12" md="6" lg="6">
+          <div class="login-image">
+            <img src="../assets/img/login.png" alt="Two humans" />
+          </div>
+        </b-col>
+        <b-col cols="12" md="6" lg="6">
+          <b-card>
+            <div class="form-login">
               <b-form @submit="onSubmit" @reset="onReset">
                 <b-form-group
                   id="input-group-email"
@@ -41,10 +40,12 @@
                 </b-form-group>
                 <b-button class="btn-login" block type="submit">Login</b-button>
               </b-form>
-            </b-card>
-          </div>
+              <div class="register-now">
+                <a href="/register">Belum punya akun? Daftar sekarang</a>
+              </div>
+            </div>
+          </b-card>
         </b-col>
-        <b-col></b-col>
       </b-row>
     </div>
 
@@ -100,30 +101,32 @@ export default {
 }
 .form-login {
   text-align: left;
+  padding: 16px;
 }
 .btn-login {
-  background-color: #c3aed6;
+  background-color: #424874;
   border: 0;
   margin-top: 32px;
+  margin-bottom: 16px;
   font-size: 1.5rem;
 }
 .btn-login:hover {
-  background-color: #424874;
+  background-color: #8675a9;
 }
-.btn-login:active {
-  background-color: #e11d74;
+.register-now {
+  text-align: center;
+  font-size: 14px;
 }
-.jumbo {
-  background-color: #424874;
-  padding: 32px;
-  padding-top: 32px;
-  color: white;
+.register-now a {
+  color: #424874;
 }
-.jumbo-title {
-  font-size: 3.5rem;
+.login-image {
+  padding-top: 16px;
 }
 .login-container {
-  margin: 32px;
+  margin: 64px;
+  margin-right: 128px;
+  margin-left: 128px;
 }
 .spinner {
   color: #c3aed6;

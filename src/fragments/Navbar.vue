@@ -1,6 +1,8 @@
 <template>
   <div id="nav">
     <b-navbar class="navbar" toggleable="sm" type="dark">
+      <b-navbar-brand>{{ navBrand }}</b-navbar-brand>
+
       <b-navbar-toggle
         class="navbar-toggle"
         target="nav-collapse"
@@ -50,6 +52,13 @@ export default {
         return parseJwt(getCookie("token"))["nama"];
       }
     },
+    navBrand() {
+      const path = this.$route.path;
+      if (path.includes("login") || path.includes("register")) {
+        return path.charAt(1).toUpperCase() + path.slice(2);
+      }
+      return "";
+    },
   },
   methods: {
     logout() {
@@ -58,7 +67,7 @@ export default {
     },
     isLoggedIn() {
       return isLoggedIn();
-    }
+    },
   },
 };
 </script>
