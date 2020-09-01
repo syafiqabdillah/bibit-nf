@@ -139,7 +139,7 @@ export default {
           if (this.searchQuery !== "") {
             this.loading = true;
             axios
-              .get(`http://localhost:5000/search-products/${this.searchQuery}`)
+              .get(`${baseUrl}/search-products/${this.searchQuery}`)
               .then((res) => {
                 this.productList = res.data.data;
               })
@@ -148,9 +148,9 @@ export default {
               })
               .finally(() => (this.loading = false));
           } else {
-            this.loadnig = true;
+            this.loading = true;
             axios
-              .get(`http://localhost:5000/products`)
+              .get(`${baseUrl}/products`)
               .then((res) => {
                 this.productList = res.data.data;
               })
