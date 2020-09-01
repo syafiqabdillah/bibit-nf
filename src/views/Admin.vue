@@ -73,11 +73,13 @@
 
 <script>
 import axios from "axios";
+import { baseUrl } from "../config/index.js";
+
 export default {
   name: "Admin",
   created() {
     axios
-      .get("http://localhost:5000/kategori")
+      .get(`${baseUrl}/kategori`)
       .then((res) => {
         this.listKategori = res.data.data;
       })
@@ -110,9 +112,9 @@ export default {
       e.preventDefault();
       this.$refs["loading"].show();
       axios
-        .post("http://localhost:5000/add-kategori", this.formAddKategori)
+        .post(`${baseUrl}/add-kategori`, this.formAddKategori)
         .then((res) => {
-          alert("success");
+          console.log("success");
         })
         .catch((e) => {
           alert(e);

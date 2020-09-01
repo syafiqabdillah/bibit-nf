@@ -34,7 +34,13 @@
       </div>
     </div>
 
-    <div class="empty-product" align="center" v-if="computedProductList.length === 0">Data kosong, peluang bisnis nih :></div>
+    <div
+      class="empty-product"
+      align="center"
+      v-if="computedProductList.length === 0"
+    >
+      Data kosong, peluang bisnis nih :>
+    </div>
 
     <div class="product-container">
       <b-card
@@ -48,7 +54,12 @@
         </div>
 
         <div align="left" id="product-detail">
-          <span class="product-name">{{ product.namaProduk }}</span>
+          <div v-b-tooltip.hover :title="product.namaProduk">
+            <div class="product-name">
+              {{ product.namaProduk }}
+            </div>
+          </div>
+
           <div class="product-price">
             {{
               product.harga > 0
@@ -67,6 +78,7 @@
           </div>
         </div>
       </b-card>
+
       <b-modal ref="popup-kontak-toko" hide-header hide-footer centered>
         <div align="center">
           <KontakToko
@@ -94,6 +106,7 @@
 <script>
 import KontakToko from "@/components/KontakToko.vue";
 import axios from "axios";
+import { baseUrl } from "../config/index.js";
 
 export default {
   name: "Home",
@@ -155,7 +168,7 @@ export default {
   created() {
     // get all kategori
     axios
-      .get("http://localhost:5000/kategori")
+      .get(`${baseUrl}/kategori`)
       .then((res) => {
         this.categoryList = res.data.data;
       })
@@ -164,7 +177,7 @@ export default {
       });
     // get all products
     axios
-      .get("http://localhost:5000/products")
+      .get(`${baseUrl}/products`)
       .then((res) => {
         this.productList = res.data.data;
       })
@@ -205,7 +218,7 @@ export default {
       this.$refs["popup-kontak-toko"].show();
       // play spinner while sending request
       axios
-        .get(`http://localhost:5000/kontak-toko/${toko_id}`)
+        .get(`${baseUrl}/kontak-toko/${toko_id}`)
         .then((res) => {
           this.selectedToko = res.data.data;
         })
@@ -223,7 +236,7 @@ export default {
       this.loading = true;
       // load more products
       axios
-        .get(`http://localhost:5000/search-products-by-category/${this.selectedCategory}`)
+        .get(`${baseUrl}/search-products-by-category/${this.selectedCategory}`)
         .then((res) => {
           this.productList = this.productList.concat(res.data.data);
         })
@@ -236,7 +249,7 @@ export default {
       this.loading = true;
       this.selectedCategory = category_id;
       axios
-        .get(`http://localhost:5000/search-products-by-category/${category_id}`)
+        .get(`${baseUrl}/search-products-by-category/${category_id}`)
         .then((res) => {
           this.productList = res.data.data;
         })
@@ -251,8 +264,6 @@ export default {
 .product-price {
   font-size: 0.875rem;
   color: #fa591d;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   line-height: 22px;
 }
 .product-store {
@@ -262,6 +273,12 @@ export default {
 .product-seen {
   font-size: 12px;
   color: #6c757d;
+}
+.product-name {
+  width: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .seen-icon {
   margin-right: 3px;

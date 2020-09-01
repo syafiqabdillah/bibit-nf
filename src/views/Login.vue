@@ -63,6 +63,7 @@
 <script>
 import axios from "axios";
 import { parseJwt, setCookie } from "../mixins/index.js";
+import { baseUrl } from "../config/index.js";
 
 export default {
   name: "Login",
@@ -89,7 +90,7 @@ export default {
       e.preventDefault();
       this.$refs["modal-loading"].show();
       axios
-        .post("http://localhost:5000/login", this.form)
+        .post(`${ baseUrl }/login`, this.form)
         .then((res) => {
           const jwt = res.data.jwt;
           const data = parseJwt(jwt);

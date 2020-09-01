@@ -127,7 +127,7 @@
                   </div>
 
                   <div align="left" id="product-detail">
-                    <span class="product-name">{{ product.nama }}</span>
+                    <div class="product-name">{{ product.nama }}</div>
                     <div class="product-price">
                       {{
                         product.harga > 0
@@ -239,6 +239,7 @@
 <script>
 import { isLoggedIn, getCookie, parseJwt } from "../mixins/index";
 import { storage } from "../firebase/index";
+import { baseUrl } from "../config/index.js";
 import axios from "axios";
 
 export default {
@@ -281,7 +282,7 @@ export default {
       const user_id = parseJwt(token).user_id;
       // get profile data
       axios
-        .get(`http://localhost:5000/toko/${user_id}`)
+        .get(`${baseUrl}/toko/${user_id}`)
         .then((res) => {
           this.profile = res.data.data;
           this.profile.toko_id = toko_id;
@@ -292,7 +293,7 @@ export default {
 
       // get produk
       axios
-        .get(`http://localhost:5000/products/${toko_id}`)
+        .get(`${baseUrl}/products/${toko_id}`)
         .then((res) => {
           this.listProduct = res.data.data;
         })
@@ -302,7 +303,7 @@ export default {
 
       // get kategori
       axios
-        .get("http://localhost:5000/kategori")
+        .get(`${baseUrl}/kategori`)
         .then((res) => {
           this.listKategori = res.data.data;
         })
@@ -317,7 +318,7 @@ export default {
       const data = this.profile;
       this.$refs["update-toko"].show();
       axios
-        .post("http://localhost:5000/update-toko", this.profile)
+        .post(`${baseUrl}/update-toko`, this.profile)
         .then((res) => {
           console.log(res);
         })
@@ -365,7 +366,7 @@ export default {
                 this.uploadProgress.imageUrl = url;
                 // add product to database
                 axios
-                  .post("http://localhost:5000/add-product", {
+                  .post(`${baseUrl}/add-product`, {
                     toko_id: this.profile.toko_id,
                     nama: this.formAddProduct.namaProduk,
                     harga: this.formAddProduct.harga,
@@ -488,6 +489,12 @@ export default {
 /* Item */
 .product-item {
   margin-bottom: 20px;
+}
+.product-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+  width: inherit;
 }
 /* Gambar dalam item */
 .product-img-container {

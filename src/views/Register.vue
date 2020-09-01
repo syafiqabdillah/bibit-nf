@@ -92,6 +92,7 @@
 <script>
 import axios from "axios";
 import { parseJwt, setCookie } from "../mixins/index.js";
+import { baseUrl } from "../config/index.js";
 
 export default {
   name: "Register",
@@ -120,7 +121,7 @@ export default {
       e.preventDefault();
       this.$refs["modal-loading"].show();
       axios
-        .post("http://localhost:5000/register", {
+        .post(`${baseUrl}/register`, {
           nama: this.form.nama,
           email: this.form.email,
           password: this.form.password,
