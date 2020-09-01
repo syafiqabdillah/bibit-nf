@@ -142,6 +142,11 @@ export default {
 .login-container {
   margin: 128px;
 }
+@media (max-width: 480px) {
+  .login-container, .login-image {
+    margin: 4px;
+  }
+}
 .spinner {
   color: #c3aed6;
 }
