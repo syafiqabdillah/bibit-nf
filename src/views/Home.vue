@@ -66,7 +66,7 @@
         </div>
       </b-modal>
     </div>
-    
+
     <div v-if="loading">
       <b-spinner>Loading...</b-spinner>
     </div>
@@ -87,8 +87,8 @@ export default {
   },
   data() {
     return {
-      listProduct: [],
       searchQuery: "",
+      awaitingSearch: false,
       productList: [],
       productCategory: [
         "All",
@@ -111,8 +111,41 @@ export default {
         tokopedia: null,
         instagram: null,
       },
-      loading: true
+      loading: true,
     };
+  },
+  watch: {
+    searchQuery() {
+      if (!this.awaitingSearch) {
+        setTimeout(() => {
+          if (this.searchQuery !== "") {
+            this.loading = true;
+            axios
+              .get(`http://localhost:5000/search-products/${this.searchQuery}`)
+              .then((res) => {
+                this.productList = res.data.data;
+              })
+              .catch((e) => {
+                alert(e);
+              })
+              .finally(() => (this.loading = false));
+          } else {
+            this.loadnig = true;
+            axios
+              .get(`http://localhost:5000/products`)
+              .then((res) => {
+                this.productList = res.data.data;
+              })
+              .catch((e) => {
+                alert(e);
+              })
+              .finally(() => (this.loading = false));
+          }
+          this.awaitingSearch = false;
+        }, 1000); // 1 sec delay
+      }
+      this.awaitingSearch = true;
+    },
   },
   created() {
     // get all kategori
@@ -133,7 +166,7 @@ export default {
       .catch((e) => {
         alert(e);
       })
-      .finally(() => this.loading = false);
+      .finally(() => (this.loading = false));
   },
   computed: {
     computedProductList() {
@@ -173,16 +206,16 @@ export default {
     },
     seeMore() {
       this.loading = true;
-      // load more products 
+      // load more products
       axios
-      .get("http://localhost:5000/products")
-      .then((res) => {
-        this.productList = this.productList.concat(res.data.data);
-      })
-      .catch((e) => {
-        alert(e);
-      })
-      .finally(() => this.loading = false);
+        .get("http://localhost:5000/products")
+        .then((res) => {
+          this.productList = this.productList.concat(res.data.data);
+        })
+        .catch((e) => {
+          alert(e);
+        })
+        .finally(() => (this.loading = false));
     },
   },
 };
@@ -211,7 +244,6 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, 200px);
   justify-content: space-around;
-  padding-bottom: 20px;
   margin-left: 108px;
   margin-right: 108px;
   margin-top: 32px;
