@@ -11,7 +11,7 @@
     <div class="profile-container">
       <b-row>
         <b-col cols="12" md="4" lg="4">
-          <div>
+          <div id="kiri">
             <b-card>
               <div class="profile-toko">
                 <b-img
@@ -109,7 +109,7 @@
           <div>
             <b-card>
               <div align="center">
-                <b-button class="add-product" v-on:click="showFormAddProduct()">
+                <b-button class="add-product" block v-on:click="showFormAddProduct()">
                   <b-icon class="add-product-icon" icon="plus"></b-icon>Tambah
                   Produk
                 </b-button>
@@ -166,6 +166,19 @@
               id="add-produk-nama"
               v-model="formAddProduct.namaProduk"
             ></b-form-input>
+          </b-form-group>
+
+          <b-form-group
+            label-cols="4"
+            label-cols-lg="3"
+            label="Kategori"
+            label-for="add-produk-kategori"
+          >
+            <b-form-select
+              v-model="formAddProduct.kategoriId"
+              :options="computedListKategori"
+            >
+            </b-form-select>
           </b-form-group>
 
           <b-form-group
@@ -248,10 +261,12 @@ export default {
       },
       formAddProduct: {
         namaProduk: "",
+        kategoriId: "",
         harga: "",
         image: null,
       },
       listProduct: [],
+      listKategori: [],
       productList: [],
     };
   },
@@ -280,6 +295,16 @@ export default {
         .get(`http://localhost:5000/products/${toko_id}`)
         .then((res) => {
           this.listProduct = res.data.data;
+        })
+        .catch((e) => {
+          alert(e);
+        });
+
+      // get kategori
+      axios
+        .get("http://localhost:5000/kategori")
+        .then((res) => {
+          this.listKategori = res.data.data;
         })
         .catch((e) => {
           alert(e);
@@ -382,6 +407,14 @@ export default {
       }
       return null;
     },
+    computedListKategori() {
+      return this.listKategori.map((kategori) => {
+        return {
+          value: kategori.id,
+          text: kategori.nama,
+        };
+      });
+    },
   },
 };
 </script>
@@ -445,7 +478,7 @@ export default {
 .product-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, 150px);
-  justify-content: space-between;
+  justify-content: space-around;
   column-gap: 4px;
   margin: 20px;
   margin-left: 32px;
@@ -507,9 +540,31 @@ export default {
   color: white;
 }
 .jumbo-title {
-  font-size: 3.0rem;
+  font-size: 3rem;
 }
 .title-nama-toko {
   font-size: 2.75rem;
+}
+@media (max-width: 800px) {
+  .profile-container {
+    margin: 4px;
+  }
+  .jumbo-title {
+    font-size: 2rem;
+  }
+  .title-nama-toko {
+    font-size: 1.5rem;
+  }
+  #kiri {
+    margin-bottom: 8px;
+  }
+  .add-product {
+    width: 75%;
+    margin: 8px;
+    margin-top: 32px;
+  }
+  .product-container {
+    grid-template-columns: repeat(auto-fill, 200px);
+  }
 }
 </style>

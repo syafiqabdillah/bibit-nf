@@ -11,39 +11,6 @@
           <div class="form-register">
             <b-card>
               <h2 class="user-mgt-title">User Management</h2>
-              <b-form @submit="onSubmit" @reset="onReset">
-                <b-form-group
-                  id="input-group-nama"
-                  label="Name:"
-                  label-for="input-nama"
-                >
-                  <b-form-input
-                    id="input-nama"
-                    v-model="form.nama"
-                    type="text"
-                    required
-                    placeholder="Enter name"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-form-group
-                  id="input-group-email"
-                  label="Email address:"
-                  label-for="input-email"
-                >
-                  <b-form-input
-                    id="input-email"
-                    v-model="form.email"
-                    type="email"
-                    required
-                    placeholder="Enter email"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-button class="btn-login" block type="submit"
-                  >Register</b-button
-                >
-              </b-form>
             </b-card>
           </div>
         </div>
@@ -60,10 +27,17 @@
       <b-col>
         <div class="kategori-mgt-container">
           <b-card>
-            <h2>Kategori</h2>
-            <b-button v-on:click="addKategori" class="mb-3" variant="primary">
-              Tambah Kategori
-            </b-button>
+            <div class="table-header">
+              <h2>Kategori</h2>
+              <b-button
+                v-on:click="showAddKategoriModal"
+                class="mb-3"
+                variant="primary"
+              >
+                Tambah Kategori
+              </b-button>
+            </div>
+
             <b-table :items="listKategori" :fields="fieldTableKategori">
               <template v-slot:cell(action)="row">
                 <b-button size="sm" @click="editKategori(row.item.id)">
@@ -73,45 +47,51 @@
             </b-table>
           </b-card>
         </div>
-        <b-modal centered ref="modal-add-kategori" title="Tambah Kategori">
-          <b-form-group 
-          label="Nama Kategori"
-          label-for="add-kategori-nama"
-          >
-            <b-form-input v-model="formAdd.nama" id="add-kategori-nama">
-              
+        <b-modal
+          @ok="submitNewKategori"
+          centered
+          ref="modal-add-kategori"
+          title="Tambah Kategori"
+        >
+          <b-form-group label="Nama Kategori" label-for="add-kategori-nama">
+            <b-form-input v-model="formAddKategori.nama" id="add-kategori-nama">
             </b-form-input>
           </b-form-group>
         </b-modal>
       </b-col>
       <b-col></b-col>
     </b-row>
+
+    <b-modal ref="loading" centered hide-header hide-footer>
+      <div align="center">
+        <b-spinner></b-spinner>
+        Loading...
+      </div>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Admin",
+  created() {
+    axios
+      .get("http://localhost:5000/kategori")
+      .then((res) => {
+        this.listKategori = res.data.data;
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  },
   data() {
     return {
-      form: {
-        email: "",
+      listKategori: [],
+      fieldTableKategori: ["id", "nama", "action"],
+      formAddKategori: {
         nama: "",
       },
-      listKategori: [
-        {
-          id: 1,
-          nama: "Makanan",
-        },
-        {
-          id: 2,
-          nama: "Minuman",
-        },
-      ],
-      fieldTableKategori: ["id", "nama", "action"],
-      formAdd: {
-        nama: ""
-      }
     };
   },
   methods: {
@@ -123,8 +103,24 @@ export default {
     editKategori(id) {
       console.log(id);
     },
-    addKategori() {
+    showAddKategoriModal() {
       this.$refs["modal-add-kategori"].show();
+    },
+    submitNewKategori(e) {
+      e.preventDefault();
+      this.$refs["loading"].show();
+      axios
+        .post("http://localhost:5000/add-kategori", this.formAddKategori)
+        .then((res) => {
+          alert("success");
+        })
+        .catch((e) => {
+          alert(e);
+        })
+        .finally(() => {
+          this.$refs["loading"].hide();
+          location.reload();
+        });
     },
   },
 };
@@ -163,5 +159,12 @@ export default {
 .toko-mgt-container,
 .kategori-mgt-container {
   margin: 32px;
+}
+/* header table */
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 </style>
