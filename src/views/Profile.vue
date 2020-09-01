@@ -1,11 +1,11 @@
 <template>
   <div class="profile">
     <div class="jumbo">
-      <h1 class="jumbo-title">
+      <h2 class="jumbo-title">
         <b-icon class="seen-icon" icon="shop"></b-icon>
-        Profile Toko <br />
-        "{{ profile.nama }}"
-      </h1>
+        Profil Toko <br />
+        <span class="title-nama-toko"> "{{ profile.nama }}"</span>
+      </h2>
     </div>
 
     <div class="profile-container">
@@ -434,7 +434,7 @@ export default {
   width: 50%;
   background-color: #424874;
   color: white;
-  margin-top: 20px;
+  margin-top: 32px;
   border: 0px;
 }
 .add-product:hover {
@@ -444,7 +444,7 @@ export default {
 /* List Produk */
 .product-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 150px); 
+  grid-template-columns: repeat(auto-fill, 150px);
   justify-content: space-between;
   column-gap: 4px;
   margin: 20px;
@@ -502,12 +502,14 @@ export default {
 /* Header */
 .jumbo {
   background-color: #424874;
-  padding-bottom: 32px;
+  padding-bottom: 16px;
   padding-top: 16px;
   color: white;
 }
 .jumbo-title {
-  font-size: 3.5rem;
+  font-size: 3.0rem;
 }
-
+.title-nama-toko {
+  font-size: 2.75rem;
+}
 </style>

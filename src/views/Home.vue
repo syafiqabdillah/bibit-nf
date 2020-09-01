@@ -2,9 +2,11 @@
   <div class="home">
     <div class="jumbo">
       <h1 class="jumbo-title">
-        <b-icon class="title-icon" icon="cart3"></b-icon>Bantu Bisnis Teman
+        <b-icon class="title-icon" icon="cart3"></b-icon>Bantuin Bisnis Teman
       </h1>
-      <p class="jumbo-subtitle">Yuk beli jualan teman!</p>
+      <p class="jumbo-subtitle">
+        Kalau bisa beli lewat teman sendiri, kenapa nggak?
+      </p>
       <b-form>
         <b-form-input
           id="search-query"
@@ -26,13 +28,9 @@
         :key="product.id"
         v-on:click="showDetail(product)"
       >
-      <div class="product-img-container">
-        <img
-          :src="product.imageUrl"
-          :alt="product.namaProduk"
-        />
-      </div>
-        
+        <div class="product-img-container">
+          <img :src="product.imageUrl" :alt="product.namaProduk" />
+        </div>
 
         <div align="left" id="product-detail">
           <span class="product-name">{{ product.namaProduk }}</span>
@@ -57,7 +55,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -80,14 +78,14 @@ export default {
     };
   },
   created() {
-    axios.get('http://localhost:5000/products')
-    .then(res => {
-      this.productList = res.data.data;
-    })
-    .catch(e => {
-      alert(e)
-    })
-
+    axios
+      .get("http://localhost:5000/products")
+      .then((res) => {
+        this.productList = res.data.data;
+      })
+      .catch((e) => {
+        alert(e);
+      });
   },
   computed: {
     computedProductList() {
@@ -108,7 +106,7 @@ export default {
     },
     priceFormat(price) {
       if (price !== "0") {
-        return new Intl.NumberFormat().format(price);
+        return new Intl.NumberFormat(["ban", "id"]).format(price);
       }
       return "Tanya penjual";
     },
@@ -118,8 +116,7 @@ export default {
 
 <style lang="css" scoped>
 .product-price {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 0.875rem;
   color: #fa591d;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -141,15 +138,16 @@ export default {
   grid-template-columns: repeat(auto-fill, 200px);
   justify-content: space-around;
   padding-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 20px;
+  margin-left: 108px;
+  margin-right: 108px;
+  margin-top: 32px;
 }
 .product-item {
   margin-bottom: 20px;
 }
 #product-detail {
   padding: 20px;
+  padding-top: 10px;
 }
 .card-body {
   padding: 0px;
@@ -189,11 +187,22 @@ a:link {
 a:visited {
   color: white;
 }
+/* Header */
 .jumbo {
   background-color: #424874;
-  padding: 32px;
-  padding-top: 32px;
+  padding: 128px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   color: white;
+}
+@media (max-width: 800px) {
+  .jumbo {
+    padding: 32px;
+  }
+  .product-container {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
 }
 .jumbo-title {
   font-size: 3.5rem;
@@ -202,9 +211,8 @@ a:visited {
   margin-right: 10px;
 }
 .jumbo-subtitle {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 500;
-  margin-bottom: 48px;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
 }
 </style>
