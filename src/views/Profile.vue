@@ -552,7 +552,10 @@ export default {
 .title-nama-toko {
   font-size: 2.75rem;
 }
-@media (max-width: 800px) {
+@media (max-width: 480px) {
+  #avatar-toko {
+    height: 100px;
+  }
   .profile-container {
     margin: 4px;
   }
@@ -571,7 +574,13 @@ export default {
     margin-top: 32px;
   }
   .product-container {
-    grid-template-columns: repeat(auto-fill, 200px);
+    grid-template-columns: repeat(auto-fill, 125px);
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  .profile-toko {
+    margin: 4px;
+    font-size: 1.0rem;
   }
 }
 </style>
