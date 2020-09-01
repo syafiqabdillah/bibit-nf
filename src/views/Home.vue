@@ -354,15 +354,6 @@ a:visited {
   padding-bottom: 16px;
   color: white;
 }
-@media (max-width: 800px) {
-  .jumbo {
-    padding: 32px;
-  }
-  .product-container {
-    margin-left: 32px;
-    margin-right: 32px;
-  }
-}
 .jumbo-title {
   font-size: 3.5rem;
 }
@@ -377,5 +368,26 @@ a:visited {
 #see-more {
   margin-bottom: 32px;
   background-color: #424874;
+}
+@media (max-width: 800px) {
+  .jumbo {
+    padding: 32px;
+  }
+  .jumbo-title {
+    font-size: 2.0rem;
+  }
+  .jumbo-subtitle {
+    font-size: .75rem;
+  }
+  .product-container {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+  .product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 150px);
+    justify-content: space-around;
+    margin: 4px
+  }
 }
 </style>
