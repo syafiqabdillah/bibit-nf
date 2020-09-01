@@ -64,6 +64,7 @@
                       label-cols-lg="3"
                       label="Shopee"
                       label-for="profile-shopee-toko"
+                      description="Contoh: https://shopee.co.id/suatutoko"
                     >
                       <b-form-input
                         id="profile-shopee-toko"
@@ -76,6 +77,7 @@
                       label-cols-lg="3"
                       label="Tokopedia"
                       label-for="profile-tokopedia-toko"
+                      description="Contoh: https://tokopedia.com/suatutoko"
                     >
                       <b-form-input
                         id="profile-tokopedia-toko"
@@ -88,6 +90,7 @@
                       label-cols-lg="3"
                       label="Instagram"
                       label-for="profile-instagram-toko"
+                      description="Contoh: https://instagram.com/suatutoko"
                     >
                       <b-form-input
                         id="profile-instagram-toko"
@@ -320,7 +323,6 @@ export default {
       axios
         .post(`${baseUrl}/update-toko`, this.profile)
         .then((res) => {
-          alert(res);
         })
         .catch((e) => {
           alert(e);
@@ -332,7 +334,6 @@ export default {
     },
     onSubmit(e) {
       e.preventDefault();
-      alert(this.formAddProduct);
       if (
         this.formAddProduct.namaProduk !== "" &&
         this.formAddProduct.harga !== "" &&
@@ -361,7 +362,6 @@ export default {
               .child(imageName)
               .getDownloadURL()
               .then((url) => {
-                alert(url);
                 this.uploadProgress.state = "Adding Product to Database";
                 this.uploadProgress.imageUrl = url;
                 // add product to database

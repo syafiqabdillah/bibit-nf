@@ -58,13 +58,13 @@ export default {
   },
   methods: {
     tokopediaValid(url) {
-      return url.includes("tokopedia.com");
+      return url.includes("https://tokopedia.com");
     },
     shopeeValid(url) {
-      return url.includes("shopee.co.id");
+      return url.includes("https://shopee.co.id");
     },
     instagramValid(url) {
-      return url.includes("instagram.com");
+      return url.includes("https://instagram.com");
     },
     open(url) {
       window.open(url, "_blank");
