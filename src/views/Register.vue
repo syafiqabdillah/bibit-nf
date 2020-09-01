@@ -1,16 +1,17 @@
 <template>
   <div class="login">
-    <div class="jumbo">
-      <h1 class="jumbo-title">
-        Register
-      </h1>
-    </div>
     <div class="login-container">
       <b-row>
-        <b-col></b-col>
-        <b-col cols="12" md="8" lg="6">
-          <div class="form-login">
-            <b-card>
+        <b-col cols="12" md="6" lg="6">
+          <div class="login-image">
+            <h2>Bantuin Bisnis Teman</h2>
+            <p>Kalau bisa beli lewat teman sendiri, kenapa nggak?</p>
+            <img :src="imageSource" alt="One person" />
+          </div>
+        </b-col>
+        <b-col cols="12" md="6" lg="6">
+          <b-card>
+            <div class="form-login">
               <b-form @submit="onSubmit" @reset="onReset">
                 <b-form-group
                   id="input-group-password-confirm"
@@ -27,7 +28,7 @@
 
                 <b-form-group
                   id="input-group-email"
-                  label="Email address:"
+                  label="Email:"
                   label-for="input-1"
                 >
                   <b-form-input
@@ -71,10 +72,9 @@
                   >Register</b-button
                 >
               </b-form>
-            </b-card>
-          </div>
+            </div>
+          </b-card>
         </b-col>
-        <b-col></b-col>
       </b-row>
     </div>
 
@@ -100,7 +100,17 @@ export default {
         password: "",
         passwordConfirmation: "",
       },
+      imageChoices: [
+        require("../assets/img/register1.png"),
+        require("../assets/img/register2.png"),
+      ],
     };
+  },
+  computed: {
+    imageSource() {
+      const randomIdx = Math.floor(Math.random() * this.imageChoices.length);
+      return this.imageChoices[randomIdx];
+    },
   },
   methods: {
     onSubmit(e) {
@@ -136,30 +146,28 @@ export default {
 }
 .form-login {
   text-align: left;
+  padding: 16px;
 }
 .btn-login {
-  background-color: #c3aed6;
+  background-color: #424874;
   border: 0;
   margin-top: 32px;
+  margin-bottom: 16px;
   font-size: 1.5rem;
 }
 .btn-login:hover {
-  background-color: #424874;
+  background-color: #8675a9;
 }
-.btn-login:active {
-  background-color: #e11d74;
+.login-image {
+  padding: 24px;
+  color: #424874;
 }
-.jumbo {
-  background-color: #424874;
-  padding: 32px;
-  padding-top: 32px;
-  color: white;
-}
-.jumbo-title {
-  font-size: 3.5rem;
+.login-image img{
+  height: 300px;
 }
 .login-container {
-  margin: 32px;
+  margin: 128px;
+  margin-top: 64px;
 }
 .spinner {
   color: #c3aed6;

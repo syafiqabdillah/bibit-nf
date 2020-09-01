@@ -4,7 +4,10 @@
       <b-row>
         <b-col cols="12" md="6" lg="6">
           <div class="login-image">
-            <img src="../assets/img/login.png" alt="Two humans" />
+            <h2>Bantuin Bisnis Teman</h2>
+            <p>Kalau bisa beli lewat teman sendiri, kenapa nggak?</p>
+            <br>
+            <img :src="imageSource" alt="Two humans" />
           </div>
         </b-col>
         <b-col cols="12" md="6" lg="6">
@@ -13,7 +16,7 @@
               <b-form @submit="onSubmit" @reset="onReset">
                 <b-form-group
                   id="input-group-email"
-                  label="Email address:"
+                  label="Email:"
                   label-for="input-1"
                 >
                   <b-form-input
@@ -21,7 +24,7 @@
                     v-model="form.email"
                     type="email"
                     required
-                    placeholder="Enter email"
+                    placeholder="Your email"
                   ></b-form-input>
                 </b-form-group>
 
@@ -69,7 +72,17 @@ export default {
         email: "",
         password: "",
       },
+      imageChoices: [
+        require("../assets/img/login1.png"),
+        require("../assets/img/login2.png"),
+      ],
     };
+  },
+  computed: {
+    imageSource() {
+      const randomIdx = Math.floor(Math.random() * this.imageChoices.length);
+      return this.imageChoices[randomIdx];
+    },
   },
   methods: {
     onSubmit(e) {
@@ -122,11 +135,11 @@ export default {
 }
 .login-image {
   padding-top: 16px;
+  padding-bottom: 8px;
+  color: #424874;
 }
 .login-container {
-  margin: 64px;
-  margin-right: 128px;
-  margin-left: 128px;
+  margin: 128px;
 }
 .spinner {
   color: #c3aed6;
