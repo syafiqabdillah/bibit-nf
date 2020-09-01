@@ -146,6 +146,9 @@ export default {
   .login-container, .login-image {
     margin: 4px;
   }
+  .login-image img {
+    height: 150px;
+  }
 }
 .spinner {
   color: #c3aed6;

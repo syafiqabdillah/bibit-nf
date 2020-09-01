@@ -173,6 +173,14 @@ export default {
   margin: 128px;
   margin-top: 64px;
 }
+@media (max-width: 480px) {
+  .login-container {
+    margin: 4px;
+  }
+  .login-image img {
+    height: 150px;
+  }
+}
 .spinner {
   color: #c3aed6;
 }
