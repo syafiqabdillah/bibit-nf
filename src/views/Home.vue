@@ -26,7 +26,7 @@
         class="product-item"
         v-for="product in computedProductList"
         :key="product.id"
-        v-on:click="showDetail(product)"
+        v-on:click="showDetail(product.idToko)"
       >
         <div class="product-img-container">
           <img :src="product.imageUrl" :alt="product.namaProduk" />
@@ -48,17 +48,32 @@
           </div>
         </div>
       </b-card>
+      <b-modal ref="popup-kontak-toko" hide-header hide-footer centered>
+        <div align="center">
+          <KontakToko
+            :id="selectedToko.id"
+            :nama="selectedToko.nama"
+            :alamat="selectedToko.alamat"
+            :nohp="selectedToko.nohp"
+            :shopee="selectedToko.shopee"
+            :tokopedia="selectedToko.tokopedia"
+            :instagram="selectedToko.instagram"
+          />
+        </div>
+      </b-modal>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import KontakToko from "@/components/KontakToko.vue";
 import axios from "axios";
 
 export default {
   name: "Home",
+  components: {
+    KontakToko,
+  },
   data() {
     return {
       listProduct: [],
@@ -75,9 +90,29 @@ export default {
         "Hobi",
         "Mainan",
       ],
+      listKategori: [],
+      selectedToko: {
+        id: null,
+        nama: null,
+        alamat: null,
+        nohp: null,
+        shopee: null,
+        tokopedia: null,
+        instagram: null,
+      },
     };
   },
   created() {
+    // get all kategori
+    axios
+      .get("http://localhost:5000/kategori")
+      .then((res) => {
+        this.listKategori = res.data.data;
+      })
+      .catch((e) => {
+        alert(e);
+      });
+    // get all products
     axios
       .get("http://localhost:5000/products")
       .then((res) => {
@@ -101,8 +136,18 @@ export default {
     },
   },
   methods: {
-    showDetail(product) {
-      console.log(product);
+    showDetail(toko_id) {
+      // show toko detail in a modal
+      this.$refs["popup-kontak-toko"].show();
+      // play spinner while sending request
+      axios
+        .get(`http://localhost:5000/kontak-toko/${toko_id}`)
+        .then((res) => {
+          this.selectedToko = res.data.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
     priceFormat(price) {
       if (price !== "0") {

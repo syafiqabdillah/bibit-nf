@@ -72,6 +72,9 @@
                   >Register</b-button
                 >
               </b-form>
+              <div class="login-now">
+                <a href="/login">Sudah punya akun? Login sekarang</a>
+              </div>
             </div>
           </b-card>
         </b-col>
@@ -171,5 +174,12 @@ export default {
 }
 .spinner {
   color: #c3aed6;
+}
+.login-now {
+  text-align: center;
+  font-size: 14px;
+}
+.login-now a{
+  color: #424874;
 }
 </style>
