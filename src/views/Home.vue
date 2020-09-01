@@ -42,6 +42,10 @@
             }}
           </div>
           <div class="product-store">{{ product.namaToko }}</div>
+          <div class="product-store">
+            <b-icon icon="person-fill"></b-icon>
+            {{ product.namaSeller }}
+          </div>
           <div class="product-seen">
             <b-icon class="seen-icon" icon="eye-fill"></b-icon>Telah dilihat 45
             kali
@@ -61,6 +65,13 @@
           />
         </div>
       </b-modal>
+    </div>
+    
+    <div v-if="loading">
+      <b-spinner>Loading...</b-spinner>
+    </div>
+    <div class="mt-4" align="center">
+      <b-button id="see-more" v-on:click="seeMore">see more</b-button>
     </div>
   </div>
 </template>
@@ -100,6 +111,7 @@ export default {
         tokopedia: null,
         instagram: null,
       },
+      loading: true
     };
   },
   created() {
@@ -120,7 +132,8 @@ export default {
       })
       .catch((e) => {
         alert(e);
-      });
+      })
+      .finally(() => this.loading = false);
   },
   computed: {
     computedProductList() {
@@ -131,7 +144,10 @@ export default {
         const queryInNamaToko = product.namaToko
           .toLowerCase()
           .includes(this.searchQuery);
-        return queryInNamaProduk || queryInNamaToko;
+        const queryInNamaSeller = product.namaSeller
+          .toLowerCase()
+          .includes(this.searchQuery);
+        return queryInNamaProduk || queryInNamaToko || queryInNamaSeller;
       });
     },
   },
@@ -154,6 +170,19 @@ export default {
         return new Intl.NumberFormat(["ban", "id"]).format(price);
       }
       return "Tanya penjual";
+    },
+    seeMore() {
+      this.loading = true;
+      // load more products 
+      axios
+      .get("http://localhost:5000/products")
+      .then((res) => {
+        this.productList = this.productList.concat(res.data.data);
+      })
+      .catch((e) => {
+        alert(e);
+      })
+      .finally(() => this.loading = false);
     },
   },
 };
@@ -259,5 +288,9 @@ a:visited {
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 1.5px;
+}
+#see-more {
+  margin-bottom: 32px;
+  background-color: #424874;
 }
 </style>
