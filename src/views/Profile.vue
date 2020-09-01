@@ -77,7 +77,7 @@
                       label-cols-lg="3"
                       label="Tokopedia"
                       label-for="profile-tokopedia-toko"
-                      description="Contoh: https://tokopedia.com/suatutoko"
+                      description="Contoh: https://www.tokopedia.com/suatutoko"
                     >
                       <b-form-input
                         id="profile-tokopedia-toko"
@@ -90,7 +90,7 @@
                       label-cols-lg="3"
                       label="Instagram"
                       label-for="profile-instagram-toko"
-                      description="Contoh: https://instagram.com/suatutoko"
+                      description="Contoh: https://www.instagram.com/suatutoko"
                     >
                       <b-form-input
                         id="profile-instagram-toko"

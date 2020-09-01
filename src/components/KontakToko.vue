@@ -9,7 +9,7 @@
       </span>
     </p>
     <div class="social-media">
-      <div id="tokopedia" v-if="tokopediaValid(tokopedia)">
+      <div id="tokopedia" v-if="linkValid(tokopedia)">
         <img
           v-on:click="open(tokopedia)"
           class="logo"
@@ -17,7 +17,7 @@
           alt="tokopedia logo"
         />
       </div>
-      <div id="shopee" v-if="shopeeValid(shopee)">
+      <div id="shopee" v-if="linkValid(shopee)">
         <img
           v-on:click="open(shopee)"
           class="logo"
@@ -25,7 +25,7 @@
           alt="shopee logo"
         />
       </div>
-      <div id="instagram" v-if="instagramValid(instagram)">
+      <div id="instagram" v-if="linkValid(instagram)">
         <img
           v-on:click="open(instagram)"
           class="logo"
@@ -57,14 +57,21 @@ export default {
     instagram: String,
   },
   methods: {
+    linkValid(url){
+      try {
+        return url.includes("https://") || url.includes("http://")
+      } catch {
+        return false
+      }
+    },
     tokopediaValid(url) {
-      return url.includes("https://tokopedia.com");
+      return url.includes("https://www.tokopedia.com");
     },
     shopeeValid(url) {
-      return url.includes("https://shopee.co.id");
+      return url.includes("https://www.shopee.co.id");
     },
     instagramValid(url) {
-      return url.includes("https://instagram.com");
+      return url.includes("https://www.instagram.com");
     },
     open(url) {
       window.open(url, "_blank");
