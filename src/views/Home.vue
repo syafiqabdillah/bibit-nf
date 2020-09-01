@@ -223,7 +223,7 @@ export default {
           this.selectedToko = res.data.data;
         })
         .catch((e) => {
-          console.log(e);
+          alert(e);
         });
     },
     priceFormat(price) {

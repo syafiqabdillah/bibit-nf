@@ -133,7 +133,7 @@ export default {
           location.href = "/";
         })
         .catch((e) => {
-          console.log(e);
+          alert(e);
         })
         .finally(() => {
           this.$refs["modal-loading"].hide();

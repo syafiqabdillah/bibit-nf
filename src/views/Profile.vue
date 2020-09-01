@@ -288,7 +288,7 @@ export default {
           this.profile.toko_id = toko_id;
         })
         .catch((e) => {
-          console.log(e);
+          alert(e);
         });
 
       // get produk
@@ -320,7 +320,7 @@ export default {
       axios
         .post(`${baseUrl}/update-toko`, this.profile)
         .then((res) => {
-          console.log(res);
+          alert(res);
         })
         .catch((e) => {
           alert(e);
@@ -332,7 +332,7 @@ export default {
     },
     onSubmit(e) {
       e.preventDefault();
-      console.log(this.formAddProduct);
+      alert(this.formAddProduct);
       if (
         this.formAddProduct.namaProduk !== "" &&
         this.formAddProduct.harga !== "" &&
@@ -361,7 +361,7 @@ export default {
               .child(imageName)
               .getDownloadURL()
               .then((url) => {
-                console.log(url);
+                alert(url);
                 this.uploadProgress.state = "Adding Product to Database";
                 this.uploadProgress.imageUrl = url;
                 // add product to database
@@ -374,11 +374,10 @@ export default {
                     imageUrl: url,
                   })
                   .then((res) => {
-                    console.log(res.data);
+                    
                   })
                   .catch((e) => {
-                    console.log(e);
-                    alert("adding product failed");
+                    alert(e);
                   })
                   .finally(() => {
                     this.$refs["modal-uploading"].hide();

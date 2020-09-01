@@ -99,11 +99,10 @@ export default {
   methods: {
     onSubmit(e) {
       e.preventDefault();
-      console.log(form);
     },
     onReset() {},
     editKategori(id) {
-      console.log(id);
+      alert(id)
     },
     showAddKategoriModal() {
       this.$refs["modal-add-kategori"].show();
@@ -114,7 +113,7 @@ export default {
       axios
         .post(`${baseUrl}/add-kategori`, this.formAddKategori)
         .then((res) => {
-          console.log("success");
+          alert("success");
         })
         .catch((e) => {
           alert(e);
