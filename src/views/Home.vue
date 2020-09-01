@@ -14,18 +14,33 @@
           placeholder="Cari produk, toko, atau nama teman kamu"
         ></b-form-input>
       </b-form>
+
       <div class="categories">
-        <span v-for="category in productCategory" :key="category">
-          <a class="category" href="#">{{ category }}</a>
+        <span v-for="category in computedCategoryList" :key="category.id">
+          <a
+            v-if="selectedCategory === category.id"
+            class="selected-category"
+            v-on:click="searchByCategory(category.id)"
+            >{{ category.nama }}</a
+          >
+
+          <a
+            v-else
+            class="category"
+            v-on:click="searchByCategory(category.id)"
+            >{{ category.nama }}</a
+          >
         </span>
       </div>
     </div>
+
+    <div class="empty-product" align="center" v-if="computedProductList.length === 0">Data kosong, peluang bisnis nih :></div>
 
     <div class="product-container">
       <b-card
         class="product-item"
         v-for="product in computedProductList"
-        :key="product.id"
+        :key="product.key"
         v-on:click="showDetail(product.idToko)"
       >
         <div class="product-img-container">
@@ -90,18 +105,7 @@ export default {
       searchQuery: "",
       awaitingSearch: false,
       productList: [],
-      productCategory: [
-        "All",
-        "Makanan & Minuman",
-        "Elektronik",
-        "Snack",
-        "Aksesoris",
-        "Perawatan Tubuh",
-        "Office & Stationery",
-        "Hobi",
-        "Mainan",
-      ],
-      listKategori: [],
+      categoryList: [],
       selectedToko: {
         id: null,
         nama: null,
@@ -112,6 +116,7 @@ export default {
         instagram: null,
       },
       loading: true,
+      selectedCategory: 0,
     };
   },
   watch: {
@@ -152,7 +157,7 @@ export default {
     axios
       .get("http://localhost:5000/kategori")
       .then((res) => {
-        this.listKategori = res.data.data;
+        this.categoryList = res.data.data;
       })
       .catch((e) => {
         alert(e);
@@ -183,6 +188,16 @@ export default {
         return queryInNamaProduk || queryInNamaToko || queryInNamaSeller;
       });
     },
+    computedCategoryList() {
+      var newList = [
+        {
+          id: 0,
+          nama: "All",
+        },
+      ];
+      newList = newList.concat(this.categoryList);
+      return newList;
+    },
   },
   methods: {
     showDetail(toko_id) {
@@ -208,7 +223,7 @@ export default {
       this.loading = true;
       // load more products
       axios
-        .get("http://localhost:5000/products")
+        .get(`http://localhost:5000/search-products-by-category/${this.selectedCategory}`)
         .then((res) => {
           this.productList = this.productList.concat(res.data.data);
         })
@@ -216,6 +231,17 @@ export default {
           alert(e);
         })
         .finally(() => (this.loading = false));
+    },
+    searchByCategory(category_id) {
+      this.loading = true;
+      this.selectedCategory = category_id;
+      axios
+        .get(`http://localhost:5000/search-products-by-category/${category_id}`)
+        .then((res) => {
+          this.productList = res.data.data;
+        })
+        .catch((e) => alert(e))
+        .finally((e) => (this.loading = false));
     },
   },
 };
@@ -239,6 +265,10 @@ export default {
 }
 .seen-icon {
   margin-right: 3px;
+}
+.empty-product {
+  text-align: center;
+  margin-top: 32px;
 }
 .product-container {
   display: grid;
@@ -278,14 +308,20 @@ export default {
   flex-wrap: wrap;
   margin-top: 8px;
 }
-.category {
+.category,
+.selected-category {
   margin-right: 12px;
   font-size: 12px;
   font-weight: 200;
   letter-spacing: 0.5px;
+  color: #c3aed6;
+}
+.selected-category {
+  color: white;
 }
 .category:hover {
-  color: #c3aed6;
+  color: #dea5a4;
+  cursor: pointer;
 }
 a:link {
   color: white;

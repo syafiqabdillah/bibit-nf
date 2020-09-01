@@ -369,6 +369,7 @@ export default {
                     toko_id: this.profile.toko_id,
                     nama: this.formAddProduct.namaProduk,
                     harga: this.formAddProduct.harga,
+                    kategori_id: this.formAddProduct.kategoriId,
                     imageUrl: url,
                   })
                   .then((res) => {
