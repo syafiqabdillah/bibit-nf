@@ -46,6 +46,10 @@
               <div class="register-now">
                 <a href="/register">Belum punya akun? Daftar sekarang</a>
               </div>
+              <!-- <hr>
+              <div align="center" v-on:click="getGoogleToken">
+                Login with Google
+              </div> -->
             </div>
           </b-card>
         </b-col>
@@ -105,6 +109,15 @@ export default {
         });
     },
     onReset() {},
+    getGoogleToken() {
+      this.$gAuth.getAuthCode()
+      .then(res => {
+        console.log(`dari google auth ${res}`)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+    }
   },
 };
 </script>
