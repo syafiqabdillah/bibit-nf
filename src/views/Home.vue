@@ -37,7 +37,7 @@
     <div
       class="empty-product"
       align="center"
-      v-if="computedProductList.length === 0"
+      v-if="!loading && computedProductList.length === 0"
     >
       Data kosong, peluang bisnis nih :>
     </div>
