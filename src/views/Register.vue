@@ -2,14 +2,14 @@
   <div class="login">
     <div class="login-container">
       <b-row>
-        <b-col cols="12" md="6" lg="6">
+        <b-col cols="12" md="12" lg="6">
           <div class="login-image">
             <h2>Bantuin Bisnis Teman</h2>
             <p>Kalau bisa beli lewat teman sendiri, kenapa nggak?</p>
             <img :src="imageSource" alt="One person" />
           </div>
         </b-col>
-        <b-col cols="12" md="6" lg="6">
+        <b-col cols="12" md="12" lg="6">
           <b-card>
             <div class="form-login">
               <b-form @submit="onSubmit" @reset="onReset">

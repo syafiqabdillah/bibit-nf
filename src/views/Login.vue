@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-container">
       <b-row>
-        <b-col cols="12" md="6" lg="6">
+        <b-col cols="12" md="12" lg="6">
           <div class="login-image">
             <h2>Bantuin Bisnis Teman</h2>
             <p>Kalau bisa beli lewat teman sendiri, kenapa nggak?</p>
@@ -10,7 +10,7 @@
             <img :src="imageSource" alt="Two humans" />
           </div>
         </b-col>
-        <b-col cols="12" md="6" lg="6">
+        <b-col cols="12" md="12" lg="6">
           <b-card>
             <div class="form-login">
               <b-form @submit="onSubmit" @reset="onReset">
@@ -130,6 +130,9 @@ export default {
   text-align: left;
   padding: 16px;
 }
+.login-container {
+  margin: 128px;
+}
 .btn-login {
   background-color: #424874;
   border: 0;
@@ -152,11 +155,8 @@ export default {
   padding-bottom: 8px;
   color: #424874;
 }
-.login-container {
-  margin: 128px;
-}
 @media (max-width: 480px) {
-  .login-container, .login-image {
+  .login-image {
     margin: 4px;
   }
   .login-image img {
