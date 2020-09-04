@@ -77,7 +77,7 @@ import { baseUrl } from "../config/index.js";
 import { getJwtData } from "../mixins/index.js";
 export default {
   name: "Admin",
-  beforeCreate() {
+  created() {
     // check if admin
     if (getJwtData().email !== "syafiq.abdillah@ui.ac.id") {
       location.href = "/";
