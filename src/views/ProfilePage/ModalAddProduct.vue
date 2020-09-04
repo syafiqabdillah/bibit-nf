@@ -35,7 +35,7 @@
             label-for="add-produk-kategori"
           >
             <b-form-select
-              v-model="formAddProduct.kategoriId"
+              v-model="formAddProduct.kategori_id"
               :options="computedListKategori"
               required
             >
@@ -64,7 +64,7 @@
             label-for="add-produk-image"
           >
             <b-form-file
-              class="upload-file"
+              class="upload-file text-nowrap text-truncate"
               id="add-produk-image"
               v-model="formAddProduct.image"
               placeholder="Pilih gambar..."
@@ -105,7 +105,7 @@ export default {
     return {
       formAddProduct: {
         namaProduk: "",
-        kategoriId: "",
+        kategori_id: "",
         harga: "",
         image: null,
       },
@@ -136,17 +136,17 @@ export default {
       this.$refs["modal-add-product"].show();
     },
     onReset() {
-        this.formAddProduct.namaProduk = ""
-        this.formAddProduct.harga = ""
-        this.formAddProduct.image = null
-        this.formAddProduct.kategori_id = ""
+      this.formAddProduct.namaProduk = "";
+      this.formAddProduct.harga = "";
+      this.formAddProduct.image = null;
+      this.formAddProduct.kategori_id = "";
     },
     onSubmit(e) {
       e.preventDefault();
       if (
         this.formAddProduct.namaProduk !== "" &&
         this.formAddProduct.harga !== "" &&
-        this.formAddProduct.image !== null && 
+        this.formAddProduct.image !== null &&
         this.formAddProduct.kategori_id !== ""
       ) {
         // show modal spinner for uploading image
@@ -180,7 +180,7 @@ export default {
                     toko_id: this.profile.toko_id,
                     nama: this.formAddProduct.namaProduk,
                     harga: this.formAddProduct.harga,
-                    kategori_id: this.formAddProduct.kategoriId,
+                    kategori_id: this.formAddProduct.kategori_id,
                     imageUrl: url,
                   })
                   .then((res) => {})
@@ -195,7 +195,7 @@ export default {
           }
         );
       } else {
-          alert('Lengkapi form')
+        alert("Lengkapi form");
       }
     },
   },
