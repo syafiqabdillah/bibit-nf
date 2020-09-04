@@ -10,7 +10,7 @@
 
     <div class="profile-container">
       <b-row>
-        <b-col cols="12" md="4" lg="4">
+        <b-col cols="12" md="5" lg="5">
           <div id="kiri">
             <b-card>
               <div class="profile-toko">
@@ -59,17 +59,21 @@
                       ></b-form-input>
                     </b-form-group>
 
+                    <hr>
+
                     <b-form-group
                       label-cols="4"
                       label-cols-lg="3"
                       label="Shopee"
                       label-for="profile-shopee-toko"
-                      description="Contoh: https://shopee.co.id/suatutoko"
                     >
-                      <b-form-input
-                        id="profile-shopee-toko"
-                        v-model="profile.shopee"
-                      ></b-form-input>
+                      <b-input-group size="sm" prepend="https://shopee.co.id/">
+                        <b-form-input
+                          id="profile-shopee-toko"
+                          v-model="profile.shopee"
+                          placeholder="username"
+                        ></b-form-input>
+                      </b-input-group>
                     </b-form-group>
 
                     <b-form-group
@@ -77,12 +81,14 @@
                       label-cols-lg="3"
                       label="Tokopedia"
                       label-for="profile-tokopedia-toko"
-                      description="Contoh: https://www.tokopedia.com/suatutoko"
                     >
-                      <b-form-input
-                        id="profile-tokopedia-toko"
-                        v-model="profile.tokopedia"
-                      ></b-form-input>
+                      <b-input-group size="sm" prepend="https://tokopedia.com/">
+                        <b-form-input
+                          id="profile-tokopedia-toko"
+                          v-model="profile.tokopedia"
+                          placeholder="username"
+                        ></b-form-input>
+                      </b-input-group>
                     </b-form-group>
 
                     <b-form-group
@@ -90,12 +96,14 @@
                       label-cols-lg="3"
                       label="Instagram"
                       label-for="profile-instagram-toko"
-                      description="Contoh: https://www.instagram.com/suatutoko"
                     >
-                      <b-form-input
-                        id="profile-instagram-toko"
-                        v-model="profile.instagram"
-                      ></b-form-input>
+                      <b-input-group size="sm" prepend="https://instagram.com/">
+                        <b-form-input
+                          id="profile-instagram-toko"
+                          v-model="profile.instagram"
+                          placeholder="username"
+                        ></b-form-input>
+                      </b-input-group>
                     </b-form-group>
 
                     <b-button class="btn-update" block type="submit"
@@ -108,11 +116,15 @@
           </div>
         </b-col>
 
-        <b-col cols="12" md="8" lg="8">
+        <b-col cols="12" md="7" lg="7">
           <div>
             <b-card>
               <div align="center">
-                <b-button class="add-product" block v-on:click="showFormAddProduct()">
+                <b-button
+                  class="add-product"
+                  block
+                  v-on:click="showFormAddProduct()"
+                >
                   <b-icon class="add-product-icon" icon="plus"></b-icon>Tambah
                   Produk
                 </b-button>
@@ -322,8 +334,7 @@ export default {
       this.$refs["update-toko"].show();
       axios
         .post(`${baseUrl}/update-toko`, this.profile)
-        .then((res) => {
-        })
+        .then((res) => {})
         .catch((e) => {
           alert(e);
         })
@@ -373,9 +384,7 @@ export default {
                     kategori_id: this.formAddProduct.kategoriId,
                     imageUrl: url,
                   })
-                  .then((res) => {
-                    
-                  })
+                  .then((res) => {})
                   .catch((e) => {
                     alert(e);
                   })
@@ -434,6 +443,9 @@ export default {
   text-align: left;
 }
 /* Profile Toko (sebelah kiri) */
+#kiri {
+  margin-bottom: 16px;
+}
 .profile-container {
   margin: 32px;
 }
@@ -478,9 +490,8 @@ export default {
 /* List Produk */
 .product-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 150px);
+  grid-template-columns: repeat(auto-fill, 170px);
   justify-content: space-around;
-  column-gap: 4px;
   margin: 20px;
   margin-left: 32px;
   margin-right: 32px;
@@ -492,7 +503,7 @@ export default {
 .product-name {
   overflow: hidden;
   white-space: nowrap;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   width: inherit;
 }
 /* Gambar dalam item */
@@ -580,7 +591,7 @@ export default {
   }
   .profile-toko {
     margin: 4px;
-    font-size: 1.0rem;
+    font-size: 1rem;
   }
 }
 </style>

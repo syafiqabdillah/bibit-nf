@@ -9,25 +9,25 @@
       </span>
     </p>
     <div class="social-media">
-      <div id="tokopedia" v-if="linkValid(tokopedia)">
+      <div id="tokopedia" v-if="linkValid('tokopedia', tokopedia)">
         <img
-          v-on:click="open(tokopedia)"
+          v-on:click="open('tokopedia', tokopedia)"
           class="logo"
           :src="imgTokopedia"
           alt="tokopedia logo"
         />
       </div>
-      <div id="shopee" v-if="linkValid(shopee)">
+      <div id="shopee" v-if="linkValid('shopee', shopee)">
         <img
-          v-on:click="open(shopee)"
+          v-on:click="open('shopee', shopee)"
           class="logo"
           :src="imgShopee"
           alt="shopee logo"
         />
       </div>
-      <div id="instagram" v-if="linkValid(instagram)">
+      <div id="instagram" v-if="linkValid('instagram', instagram)">
         <img
-          v-on:click="open(instagram)"
+          v-on:click="open('instagram', instagram)"
           class="logo"
           :src="imgInstagram"
           alt="instagram logo"
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "KontakToko",
   data() {
@@ -45,6 +46,11 @@ export default {
       imgTokopedia: require("@/assets/img/tokopedia.png"),
       imgShopee: require("@/assets/img/shopee.png"),
       imgInstagram: require("@/assets/img/instagram.png"),
+      baseOlshopUrl: {
+        tokopedia: "https://tokopedia.com/",
+        shopee: "https://shopee.co.id/",
+        instagram: "https://instagram.com/",
+      },
     };
   },
   props: {
@@ -57,24 +63,19 @@ export default {
     instagram: String,
   },
   methods: {
-    linkValid(url){
-      try {
-        return url.includes("https://") || url.includes("http://")
-      } catch {
-        return false
+    linkValid(olshop, username) {
+      if (username === "" || username === "-") {
+        return false;
       }
+      try {
+        new URL(`${this.baseOlshopUrl[olshop]}${username}`);
+      } catch {
+        return false;
+      }
+      return true;
     },
-    tokopediaValid(url) {
-      return url.includes("https://www.tokopedia.com");
-    },
-    shopeeValid(url) {
-      return url.includes("https://www.shopee.co.id");
-    },
-    instagramValid(url) {
-      return url.includes("https://www.instagram.com");
-    },
-    open(url) {
-      window.open(url, "_blank");
+    open(olshop, username) {
+      window.open(`${this.baseOlshopUrl[olshop]}${username}`, "_blank");
     },
   },
 };
