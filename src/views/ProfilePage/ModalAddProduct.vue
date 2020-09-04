@@ -10,6 +10,7 @@
       ref="modal-add-product"
       title="Tambah Produk"
       @ok="onSubmit"
+      @hidden="onReset"
       centered
     >
       <div align="center">
@@ -23,6 +24,7 @@
             <b-form-input
               id="add-produk-nama"
               v-model="formAddProduct.namaProduk"
+              required
             ></b-form-input>
           </b-form-group>
 
@@ -35,6 +37,7 @@
             <b-form-select
               v-model="formAddProduct.kategoriId"
               :options="computedListKategori"
+              required
             >
             </b-form-select>
           </b-form-group>
@@ -44,11 +47,13 @@
             label-cols-lg="3"
             label="Harga"
             label-for="add-produk-harga"
+            description="Masukkan 0 bila harga tidak menentu"
           >
             <b-form-input
               id="add-produk-harga"
               type="number"
               v-model="formAddProduct.harga"
+              required
             ></b-form-input>
           </b-form-group>
 
@@ -64,6 +69,8 @@
               v-model="formAddProduct.image"
               placeholder="Pilih gambar..."
               drop-placeholder="Taruh gambar..."
+              accept="image/*"
+              required
             ></b-form-file>
             <div id="image-preview">
               <img
@@ -128,12 +135,19 @@ export default {
     showFormAddProduct() {
       this.$refs["modal-add-product"].show();
     },
+    onReset() {
+        this.formAddProduct.namaProduk = ""
+        this.formAddProduct.harga = ""
+        this.formAddProduct.image = null
+        this.formAddProduct.kategori_id = ""
+    },
     onSubmit(e) {
       e.preventDefault();
       if (
         this.formAddProduct.namaProduk !== "" &&
         this.formAddProduct.harga !== "" &&
-        this.formAddProduct.image !== null
+        this.formAddProduct.image !== null && 
+        this.formAddProduct.kategori_id !== ""
       ) {
         // show modal spinner for uploading image
         this.uploadProgress.state = "Uploading Image";
@@ -180,6 +194,8 @@ export default {
               });
           }
         );
+      } else {
+          alert('Lengkapi form')
       }
     },
   },

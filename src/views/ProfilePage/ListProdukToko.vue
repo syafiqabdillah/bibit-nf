@@ -9,7 +9,10 @@
           v-for="product in listProduct"
           :key="product.id"
         >
-          <div class="product-img-container">
+          <div class="product-img-container" v-if="product.status === 'active'">
+            <img :src="product.imageUrl" :alt="product.nama" />
+          </div>
+          <div class="product-img-container-grey" v-if="product.status === 'inactive'">
             <img :src="product.imageUrl" :alt="product.nama" />
           </div>
 
@@ -93,6 +96,11 @@ export default {
 .product-img-container img {
   object-fit: cover;
   width: 100%;
+}
+.product-img-container-grey img {
+  object-fit: cover;
+  width: 100%;
+  filter: grayscale(100%);
 }
 .card-body {
   padding: 0px;
