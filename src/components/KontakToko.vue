@@ -1,33 +1,51 @@
 <template>
   <div>
-    <h4>{{ nama }}</h4>
-    <p>{{ alamat }}</p>
+    <div id="product-detail">
+      
+      <div class="product-img-container">
+        <img :src="product.imageUrl" :alt="product.namaProduk" />
+      </div>
+      <h5 id="nama-produk">{{ product.namaProduk }}</h5>
+      <div class="product-price">
+        {{
+          product.harga > 0
+            ? "Rp " + priceFormat(product.harga)
+            : "Tanya penjual"
+        }}
+      </div>
+    </div>
+    <hr />
+    <p>{{ toko.nama }}</p>
+    <p>
+      <b-icon icon="person-fill" /> {{ product.namaSeller }}
+      <b-icon icon="geo-alt" /> {{ toko.alamat }}
+    </p>
     <p>
       <b-icon icon="telephone-fill"></b-icon>
       <span id="nohp">
-        {{ nohp }}
+        {{ toko.nohp }}
       </span>
     </p>
     <div class="social-media">
-      <div id="tokopedia" v-if="linkValid('tokopedia', tokopedia)">
+      <div id="tokopedia" v-if="linkValid('tokopedia', toko.tokopedia)">
         <img
-          v-on:click="open('tokopedia', tokopedia)"
+          v-on:click="open('tokopedia', toko.tokopedia)"
           class="logo"
           :src="imgTokopedia"
           alt="tokopedia logo"
         />
       </div>
-      <div id="shopee" v-if="linkValid('shopee', shopee)">
+      <div id="shopee" v-if="linkValid('shopee', toko.shopee)">
         <img
-          v-on:click="open('shopee', shopee)"
+          v-on:click="open('shopee', toko.shopee)"
           class="logo"
           :src="imgShopee"
           alt="shopee logo"
         />
       </div>
-      <div id="instagram" v-if="linkValid('instagram', instagram)">
+      <div id="instagram" v-if="linkValid('instagram', toko.instagram)">
         <img
-          v-on:click="open('instagram', instagram)"
+          v-on:click="open('instagram', toko.instagram)"
           class="logo"
           :src="imgInstagram"
           alt="instagram logo"
@@ -54,13 +72,8 @@ export default {
     };
   },
   props: {
-    id: Number,
-    nama: String,
-    alamat: String,
-    nohp: String,
-    shopee: String,
-    tokopedia: String,
-    instagram: String,
+    toko: Object,
+    product: Object,
   },
   methods: {
     linkValid(olshop, username) {
@@ -76,6 +89,17 @@ export default {
     },
     open(olshop, username) {
       window.open(`${this.baseOlshopUrl[olshop]}${username}`, "_blank");
+    },
+    priceFormat(price) {
+      if (price !== "0") {
+        return new Intl.NumberFormat(["ban", "id"]).format(price);
+      }
+      return "Tanya penjual";
+    },
+  },
+  computed: {
+    imageFromUrl() {
+      return require(this.product.imageUrl);
     },
   },
 };
@@ -93,7 +117,34 @@ export default {
 .logo:hover {
   cursor: pointer;
 }
-#icon-copy:hover {
-  cursor: pointer;
+.detail-product img {
+  height: 150px;
+  width: auto;
+}
+#product-detail {
+  padding-top: 10px;
+}
+#nama-produk {
+  margin-top: 4px;
+}
+.card-body {
+  padding: 0px;
+}
+.product-img-container {
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  background-color: white;
+}
+.product-img-container img {
+  object-fit: cover;
+  height: 100%;
+}
+.product-price {
+  margin-top: 4px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fa591d;
+  line-height: 22px;
 }
 </style>

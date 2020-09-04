@@ -47,7 +47,7 @@
         class="product-item"
         v-for="product in computedProductList"
         :key="product.key"
-        v-on:click="showDetail(product.idToko)"
+        v-on:click="showDetail(product)"
       >
         <div class="product-img-container">
           <img :src="product.imageUrl" :alt="product.namaProduk" />
@@ -82,13 +82,8 @@
       <b-modal ref="popup-kontak-toko" hide-header hide-footer centered>
         <div align="center">
           <KontakToko
-            :id="selectedToko.id"
-            :nama="selectedToko.nama"
-            :alamat="selectedToko.alamat"
-            :nohp="selectedToko.nohp"
-            :shopee="selectedToko.shopee"
-            :tokopedia="selectedToko.tokopedia"
-            :instagram="selectedToko.instagram"
+            :product="selectedProduct"
+            :toko="selectedToko"
           />
         </div>
       </b-modal>
@@ -128,6 +123,7 @@ export default {
         tokopedia: null,
         instagram: null,
       },
+      selectedProduct: null,
       loading: true,
       selectedCategory: 0,
     };
@@ -213,12 +209,13 @@ export default {
     },
   },
   methods: {
-    showDetail(toko_id) {
+    showDetail(product) {
+      this.selectedProduct = product
       // show toko detail in a modal
       this.$refs["popup-kontak-toko"].show();
       // play spinner while sending request
       axios
-        .get(`${baseUrl}/kontak-toko/${toko_id}`)
+        .get(`${baseUrl}/kontak-toko/${product.idToko}`)
         .then((res) => {
           this.selectedToko = res.data.data;
         })
