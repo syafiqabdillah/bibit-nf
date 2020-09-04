@@ -156,6 +156,9 @@ export default {
   color: #424874;
 }
 @media (max-width: 480px) {
+  .login-container {
+    margin: 4px;
+  }
   .login-image {
     margin: 4px;
   }

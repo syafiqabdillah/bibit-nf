@@ -366,7 +366,7 @@ a:visited {
   margin-bottom: 32px;
   background-color: #424874;
 }
-@media (max-width: 800px) {
+@media (max-width: 480px) {
   .jumbo {
     padding: 32px;
   }
@@ -377,14 +377,12 @@ a:visited {
     font-size: .75rem;
   }
   .product-container {
-    margin-left: 32px;
-    margin-right: 32px;
-  }
-  .product-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 150px);
     justify-content: space-around;
-    margin: 4px
+    margin-top: 20px;
+    margin-left: 16px;
+    margin-right: 16px;
   }
 }
 </style>
