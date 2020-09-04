@@ -33,4 +33,10 @@ function isLoggedIn() {
   return getCookie("token") !== "";
 }
 
-export { parseJwt, setCookie, getCookie, isLoggedIn };
+function getJwtData() {
+  const jwt = getCookie('token')
+  const data = parseJwt(jwt)
+  return data;
+}
+
+export { parseJwt, setCookie, getCookie, isLoggedIn, getJwtData };

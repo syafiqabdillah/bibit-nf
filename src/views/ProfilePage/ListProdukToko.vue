@@ -10,7 +10,13 @@
           :key="product.id"
           v-on:click="showDetail(product)"
         >
-          <div :class="product.status === 'active' ? 'product-img-container': 'product-img-container-grey'">
+          <div
+            :class="
+              product.status === 'active'
+                ? 'product-img-container'
+                : 'product-img-container-grey'
+            "
+          >
             <img :src="product.imageUrl" :alt="product.nama" />
           </div>
 
@@ -93,11 +99,13 @@
           ></b-form-file>
           <div id="image-preview">
             <img
+              :class="selectedProduct.status !== 'active' ? 'grey-img' : ''"
               :src="selectedProduct.imageUrl"
               v-if="new_image === null"
               alt="Image preview"
             />
             <img
+              :class="selectedProduct.status !== 'active' ? 'grey-img' : ''"
               :src="imagePreviewUrl"
               v-if="new_image !== null"
               alt="Image preview"
@@ -125,7 +133,6 @@
         </p>
       </div>
     </b-modal>
-
   </div>
 </template>
 
@@ -205,7 +212,7 @@ export default {
         this.selectedProduct.harga !== "" &&
         (this.selectedProduct.imageUrl || this.new_image !== null)
       ) {
-        this.uploadProgress.state = "Processing"
+        this.uploadProgress.state = "Processing";
         this.$refs["modal-uploading"].show();
         // kalo nambahin gambar baru, upload dulu ke firebase buat daperin imageUrl baru
         if (this.new_image !== null) {
@@ -247,7 +254,7 @@ export default {
             .finally(() => location.reload());
         }
       } else {
-        alert('Lengkapi form')
+        alert("Lengkapi form");
       }
     },
   },
@@ -272,7 +279,8 @@ export default {
   margin-left: 32px;
   margin-right: 32px;
 }
-.product-img-container, .product-img-container-grey {
+.product-img-container,
+.product-img-container-grey {
   display: flex;
   height: 150px;
   justify-content: center;
@@ -286,6 +294,9 @@ export default {
   filter: grayscale(100%);
   object-fit: cover;
   width: 100%;
+}
+.grey-img {
+  filter: grayscale(100%);
 }
 .card-body {
   padding: 0px;

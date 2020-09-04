@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" v-if="validUser">
     <div class="jumbo">
       <h2 class="jumbo-title">
         Admin Lalala~
@@ -74,10 +74,19 @@
 <script>
 import axios from "axios";
 import { baseUrl } from "../config/index.js";
-
+import { getJwtData } from "../mixins/index.js";
 export default {
   name: "Admin",
-  created() {
+  beforeCreate() {
+    // check if admin
+    if (getJwtData().email !== "syafiq.abdillah@ui.ac.id") {
+      location.href = "/";
+    } else {
+      this.validUser = true;
+    }
+  },
+  mounted() {
+    // get kategori data
     axios
       .get(`${baseUrl}/kategori`)
       .then((res) => {
@@ -94,6 +103,7 @@ export default {
       formAddKategori: {
         nama: "",
       },
+      validUser: false
     };
   },
   methods: {
@@ -102,7 +112,7 @@ export default {
     },
     onReset() {},
     editKategori(id) {
-      alert(id)
+      alert(id);
     },
     showAddKategoriModal() {
       this.$refs["modal-add-kategori"].show();
