@@ -15,7 +15,10 @@
         </b-col>
 
         <b-col cols="12" md="7" lg="7">
-          <ListProdukToko :listProduct="listProduct" :profile="profile" />
+          <div v-if="loading" align="center">
+            <b-spinner variant="primary"></b-spinner>
+          </div>
+          <ListProdukToko v-if="!loading" :listProduct="listProduct" :profile="profile" />
         </b-col>
       </b-row>
     </div>
@@ -53,6 +56,7 @@ export default {
         instagram: "",
       },
       listProduct: [],
+      loading: true,
     };
   },
   mounted() {
@@ -78,11 +82,13 @@ export default {
             })
             .catch((e) => {
               alert(e);
-            });
+            })
+            .finally(() => (this.loading = false));
         })
         .catch((e) => {
           alert(e);
-        });
+        })
+        .finally(() => (this.loading = false));
     }
   },
   methods: {
@@ -101,7 +107,7 @@ export default {
           location.reload();
         });
     },
-    
+
     onReset(e) {
       e.preventDefault();
     },
@@ -114,7 +120,6 @@ export default {
   margin: 32px;
 }
 /* Modal */
-
 
 /* Header */
 .jumbo {

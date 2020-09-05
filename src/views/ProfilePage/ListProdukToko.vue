@@ -10,30 +10,8 @@
           :key="product.id"
           v-on:click="showDetail(product)"
         >
-          <div
-            :class="
-              product.status === 'active'
-                ? 'product-img-container'
-                : 'product-img-container-grey'
-            "
-          >
-            <img :src="product.imageUrl" :alt="product.nama" />
-          </div>
-
-          <div align="left" id="product-detail">
-            <div class="product-name">{{ product.nama }}</div>
-            <div class="product-price">
-              {{
-                product.harga > 0
-                  ? "Rp " + priceFormat(product.harga)
-                  : "Tanya penjual"
-              }}
-            </div>
-            <div class="product-seen">
-              <b-icon class="seen-icon" icon="eye-fill"></b-icon>Telah dilihat
-              45 kali
-            </div>
-          </div>
+          <!-- Profuct Item -->
+          <ProductItem :product="product" />
         </b-card>
       </div>
     </b-card>
@@ -138,6 +116,7 @@
 
 <script>
 import ModalAddProduct from "./ModalAddProduct";
+import ProductItem from "./ProductItem";
 import axios from "axios";
 import { baseUrl } from "../../config/index.js";
 import { storage } from "../../firebase/index";
@@ -145,6 +124,7 @@ export default {
   name: "ListProdukToko",
   components: {
     ModalAddProduct,
+    ProductItem
   },
   data() {
     return {
