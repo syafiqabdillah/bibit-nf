@@ -13,7 +13,7 @@
             <router-link to="/profile">Halo, {{ nama }}</router-link>
           </b-nav-item>
 
-          <b-nav-item id="divider" v-if="isLoggedIn() && !isMobile()">|</b-nav-item>
+          <b-nav-item id="divider" v-if="isLoggedIn() && !isMobileSreen">|</b-nav-item>
 
           <b-nav-item>
             <router-link to="/">Beranda</router-link>
@@ -60,6 +60,9 @@ export default {
       }
       return "";
     },
+    isMobileSreen() {
+      return isMobile();
+    }
   },
   methods: {
     logout() {
@@ -69,9 +72,6 @@ export default {
     isLoggedIn() {
       return isLoggedIn();
     },
-    isMobile() {
-      return this.isMobile()
-    }
   },
 };
 </script>
