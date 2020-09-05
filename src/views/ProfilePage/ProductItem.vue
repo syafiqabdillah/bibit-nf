@@ -1,13 +1,17 @@
 <template>
   <div>
     <div class="product-img-container">
-      <img :src="product.imageUrl" :alt="product.namaProduk" />
+      <img
+        :class="product.status !== 'active' ? 'grey-img' : ''"
+        :src="product.imageUrl"
+        :alt="product.nama"
+      />
     </div>
 
     <div align="left" id="product-detail">
-      <div v-b-tooltip.hover :title="product.namaProduk">
+      <div v-b-tooltip.hover :title="product.nama">
         <div class="product-name">
-          {{ product.namaProduk }}
+          {{ product.nama }}
         </div>
       </div>
 
@@ -17,11 +21,6 @@
             ? "Rp " + priceFormat(product.harga)
             : "Tanya penjual"
         }}
-      </div>
-      <div class="product-store">{{ product.namaToko }}</div>
-      <div class="product-store">
-        <b-icon icon="person-fill"></b-icon>
-        {{ product.namaSeller }}
       </div>
       <div class="product-seen">
         <b-icon class="seen-icon" icon="eye-fill"></b-icon>Telah dilihat
@@ -47,7 +46,7 @@ export default {
     };
   },
   mounted() {
-    // initial retrieve 
+    // initial retrieve
     axios
       .get(`${baseUrl}/view-sum/${this.product.id}`)
       .then((res) => (this.view_sum = res.data.view_sum));
@@ -99,6 +98,14 @@ export default {
   object-fit: cover;
   width: 100%;
   max-height: 150px;
+}
+.product-img-container-grey img {
+  filter: grayscale(100%);
+  object-fit: cover;
+  width: 100%;
+}
+.grey-img {
+  filter: grayscale(100%);
 }
 #product-detail {
   padding: 20px;
