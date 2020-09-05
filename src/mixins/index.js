@@ -39,4 +39,11 @@ function getJwtData() {
   return data;
 }
 
-export { parseJwt, setCookie, getCookie, isLoggedIn, getJwtData };
+function priceFormat(price) {
+  if (price !== "0") {
+    return new Intl.NumberFormat(["ban", "id"]).format(price);
+  }
+  return "Tanya penjual";
+}
+
+export { parseJwt, setCookie, getCookie, isLoggedIn, getJwtData, priceFormat };

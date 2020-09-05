@@ -49,42 +49,13 @@
         :key="product.key"
         v-on:click="showDetail(product)"
       >
-        <div class="product-img-container">
-          <img :src="product.imageUrl" :alt="product.namaProduk" />
-        </div>
+        <ProductItem :product="product" />
 
-        <div align="left" id="product-detail">
-          <div v-b-tooltip.hover :title="product.namaProduk">
-            <div class="product-name">
-              {{ product.namaProduk }}
-            </div>
-          </div>
-
-          <div class="product-price">
-            {{
-              product.harga > 0
-                ? "Rp " + priceFormat(product.harga)
-                : "Tanya penjual"
-            }}
-          </div>
-          <div class="product-store">{{ product.namaToko }}</div>
-          <div class="product-store">
-            <b-icon icon="person-fill"></b-icon>
-            {{ product.namaSeller }}
-          </div>
-          <div class="product-seen">
-            <b-icon class="seen-icon" icon="eye-fill"></b-icon>Telah dilihat 45
-            kali
-          </div>
-        </div>
       </b-card>
 
       <b-modal ref="popup-kontak-toko" hide-header hide-footer centered>
         <div align="center">
-          <KontakToko
-            :product="selectedProduct"
-            :toko="selectedToko"
-          />
+          <KontakToko :product="selectedProduct" :toko="selectedToko" />
         </div>
       </b-modal>
     </div>
@@ -100,6 +71,7 @@
 
 <script>
 import KontakToko from "@/components/KontakToko.vue";
+import ProductItem from "./Home/ProductItem";
 import axios from "axios";
 import { baseUrl } from "../config/index.js";
 
@@ -107,6 +79,7 @@ export default {
   name: "Home",
   components: {
     KontakToko,
+    ProductItem
   },
   data() {
     return {
@@ -210,7 +183,7 @@ export default {
   },
   methods: {
     showDetail(product) {
-      this.selectedProduct = product
+      this.selectedProduct = product;
       // show toko detail in a modal
       this.$refs["popup-kontak-toko"].show();
       // play spinner while sending request
@@ -218,6 +191,9 @@ export default {
         .get(`${baseUrl}/kontak-toko/${product.idToko}`)
         .then((res) => {
           this.selectedToko = res.data.data;
+
+          // update the view of this item 
+          axios.post(`${baseUrl}/add-view/${product.id}`)
         })
         .catch((e) => {
           alert(e);
@@ -258,28 +234,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.product-price {
-  font-size: 0.875rem;
-  color: #fa591d;
-  line-height: 22px;
-}
-.product-store {
-  font-size: 12px;
-  color: #6c757d;
-}
-.product-seen {
-  font-size: 12px;
-  color: #6c757d;
-}
-.product-name {
-  width: inherit;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.seen-icon {
-  margin-right: 3px;
-}
 .empty-product {
   text-align: center;
   margin-top: 32px;
@@ -295,23 +249,8 @@ export default {
 .product-item {
   margin-bottom: 20px;
 }
-#product-detail {
-  padding: 20px;
-  padding-top: 10px;
-}
 .card-body {
   padding: 0px;
-}
-.product-img-container {
-  display: flex;
-  justify-content: center;
-  height: 150px;
-  background-color: white;
-}
-.product-img-container img {
-  object-fit: cover;
-  width: 100%;
-  max-height: 150px;
 }
 .product-item:hover {
   cursor: pointer;
@@ -371,10 +310,10 @@ a:visited {
     padding: 32px;
   }
   .jumbo-title {
-    font-size: 2.0rem;
+    font-size: 2rem;
   }
   .jumbo-subtitle {
-    font-size: .75rem;
+    font-size: 0.75rem;
   }
   .product-container {
     display: grid;
