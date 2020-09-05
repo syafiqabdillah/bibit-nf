@@ -2,14 +2,11 @@
   <div id="kiri">
     <b-card>
       <div class="profile-toko">
-        <b-img
-          src="https://placekitten.com/300/300"
-          height="150px"
-          alt="Responsive image"
-          id="avatar-toko"
-        ></b-img>
-
+        <div id="logo-toko">
+          <b-icon icon="shop" font-scale="5"></b-icon>
+        </div>
         <div>
+
           <b-form @submit="updateToko">
             <b-form-group
               label-cols="4"
@@ -139,5 +136,9 @@ export default {
 }
 .spinner {
   color: #c3aed6;
+}
+#logo-toko {
+  color: #424874;
+  margin-bottom: 16px;
 }
 </style>
