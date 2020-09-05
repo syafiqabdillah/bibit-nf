@@ -147,4 +147,16 @@ export default {
   color: #fa591d;
   line-height: 22px;
 }
+#tokopedia {
+  display: flex;
+  align-items: center;
+}
+#shopee {
+  display: flex;
+  align-items: center;
+}
+#instagram {
+  display: flex;
+  align-items: center;
+}
 </style>
