@@ -34,8 +34,8 @@ function isLoggedIn() {
 }
 
 function getJwtData() {
-  const jwt = getCookie('token')
-  const data = parseJwt(jwt)
+  const jwt = getCookie("token");
+  const data = parseJwt(jwt);
   return data;
 }
 
@@ -46,4 +46,16 @@ function priceFormat(price) {
   return "Tanya penjual";
 }
 
-export { parseJwt, setCookie, getCookie, isLoggedIn, getJwtData, priceFormat };
+function isMobile() {
+  return /Mobi/.test(navigator.userAgent);
+}
+
+export {
+  parseJwt,
+  setCookie,
+  getCookie,
+  isLoggedIn,
+  getJwtData,
+  priceFormat,
+  isMobile,
+};

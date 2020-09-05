@@ -13,7 +13,7 @@
             <router-link to="/profile">Halo, {{ nama }}</router-link>
           </b-nav-item>
 
-          <b-nav-item id="divider" v-if="isLoggedIn()">|</b-nav-item>
+          <b-nav-item id="divider" v-if="isLoggedIn() && !isMobile()">|</b-nav-item>
 
           <b-nav-item>
             <router-link to="/">Beranda</router-link>
@@ -43,6 +43,7 @@ import {
   parseJwt,
   setCookie,
   isLoggedIn,
+  isMobile
 } from "../mixins/index";
 export default {
   name: "Navbar",
@@ -68,6 +69,9 @@ export default {
     isLoggedIn() {
       return isLoggedIn();
     },
+    isMobile() {
+      return this.isMobile()
+    }
   },
 };
 </script>
@@ -91,10 +95,5 @@ export default {
 }
 .greetings {
   color: #f3e6e3;
-}
-@media (max-width:560px) {
- #divider {
-   visibility: collapse;
- }
 }
 </style>
