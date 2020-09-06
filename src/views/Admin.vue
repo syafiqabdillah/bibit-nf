@@ -11,19 +11,16 @@
           <div class="form-register">
             <b-card>
               <h2 class="user-mgt-title">User Management</h2>
+              <b-table :items="listUser" :fields="fieldTableUser">
+              <template v-slot:cell(action)="row">
+                <b-form-checkbox v-model="row.item.active" switch v-on:change="toggleStatusActive(row.item)">
+                </b-form-checkbox>
+              </template>
+            </b-table>
             </b-card>
           </div>
         </div>
       </b-col>
-      <b-col>
-        <div class="toko-mgt-container">
-          <b-card>
-            <h2 class="toko-mgt-title">Toko Management</h2>
-          </b-card>
-        </div>
-      </b-col>
-    </b-row>
-    <b-row>
       <b-col>
         <div class="kategori-mgt-container">
           <b-card>
@@ -59,6 +56,11 @@
           </b-form-group>
         </b-modal>
       </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        
+      </b-col>
       <b-col></b-col>
     </b-row>
 
@@ -74,7 +76,7 @@
 <script>
 import axios from "axios";
 import { baseUrl } from "../config/index.js";
-import { getJwtData } from "../mixins/index.js";
+import { getJwtData, getCookie } from "../mixins/index.js";
 export default {
   name: "Admin",
   created() {
@@ -95,11 +97,17 @@ export default {
       .catch((e) => {
         alert(e);
       });
+    const jwt = getCookie('token');
+    axios.get(`${baseUrl}/users/${jwt}`)
+    .then(res => this.listUser = res.data.data)
+    .catch(e => alert(e))
   },
   data() {
     return {
       listKategori: [],
+      listUser: [],
       fieldTableKategori: ["id", "nama", "action"],
+      fieldTableUser: ["nama", "email", "active", { label: "", key: 'action' }],
       formAddKategori: {
         nama: "",
       },
@@ -132,6 +140,12 @@ export default {
           location.reload();
         });
     },
+    toggleStatusActive(item) {
+      axios.post(`${baseUrl}/update-user-status`, {
+        email: item.email,
+        active: !item.active
+      })
+    }
   },
 };
 </script>
