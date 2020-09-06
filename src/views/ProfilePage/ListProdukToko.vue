@@ -16,7 +16,12 @@
       </div>
     </b-card>
 
-    <b-modal title="Ubah Produk" ref="product-detail-modal" @ok="updateProduk">
+    <b-modal
+      title="Ubah Produk"
+      ref="product-detail-modal"
+      centered
+      @ok="updateProduk"
+    >
       <b-form>
         <b-form-group
           label-cols="4"
@@ -41,8 +46,7 @@
             v-model="selectedProduct.kategori_id"
             :options="computedListKategori"
             required
-          >
-          </b-form-select>
+          ></b-form-select>
         </b-form-group>
 
         <b-form-group
@@ -124,7 +128,7 @@ export default {
   name: "ListProdukToko",
   components: {
     ModalAddProduct,
-    ProductItem
+    ProductItem,
   },
   data() {
     return {

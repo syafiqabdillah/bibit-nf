@@ -123,7 +123,6 @@ export default {
       axios
         .post(`${baseUrl}/add-kategori`, this.formAddKategori)
         .then((res) => {
-          alert("success");
         })
         .catch((e) => {
           alert(e);
