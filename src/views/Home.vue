@@ -4,6 +4,9 @@
       <h1 class="jumbo-title">
         <b-icon class="title-icon" icon="cart3"></b-icon>Bantuin Bisnis Teman
       </h1>
+      <p class="jumbo-nama-komunitas">
+        -Alumni SDIT Asy Syaamil Bontang-
+      </p>
       <p class="jumbo-subtitle">
         Kalau bisa beli lewat teman sendiri, kenapa nggak?
       </p>
@@ -295,6 +298,10 @@ a:visited {
 }
 .title-icon {
   margin-right: 10px;
+}
+.jumbo-nama-komunitas {
+  font-size: 1.25rem;
+  margin-bottom: 4px;
 }
 .jumbo-subtitle {
   font-size: 1rem;
