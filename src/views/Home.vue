@@ -5,7 +5,7 @@
         <b-icon class="title-icon" icon="cart3"></b-icon>Bantuin Bisnis Teman
       </h1>
       <p class="jumbo-nama-komunitas">
-        -Alumni SDIT Asy Syaamil Bontang-
+        -Keluarga Besar Asy Syaamil & DHBS Bontang-
       </p>
       <p class="jumbo-subtitle">
         Kalau bisa beli lewat teman sendiri, kenapa nggak?
@@ -288,7 +288,8 @@ a:visited {
 /* Header */
 .jumbo {
   background-color: #424874;
-  padding: 128px;
+  padding-left: 128px;
+  padding-right: 128px;
   padding-top: 16px;
   padding-bottom: 16px;
   color: white;
