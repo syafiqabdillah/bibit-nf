@@ -7,16 +7,7 @@ import store from "./store";
 import { BootstrapVue, IconsPlugin, BIcon } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-// import GAuth from 'vue-google-oauth2'
-import sslRedirect from 'heroku-ssl-redirect';
 
-// const gauthOption = {
-//   clientId: process.env.VUE_APP_CLIENT_ID,
-//   scope: 'profile email',
-//   prompt: 'select_account'
-// }
-// Vue.use(GAuth, gauthOption)
-Vue.use(sslRedirect());
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.component("BIcon", BIcon); 
