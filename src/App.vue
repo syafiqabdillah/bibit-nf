@@ -13,11 +13,19 @@ export default {
   components: {
     Navbar,
   },
+  mounted() {
+    if (location.protocol != "https:" && process.env.NODE_ENV == "production") {
+      location.href =
+        "https:" +
+        window.location.href.substring(window.location.protocol.length);
+    }
+  },
 };
 </script>
 
 <style>
-html, body {
+html,
+body {
   height: 100%;
 }
 #app {
@@ -31,11 +39,13 @@ html, body {
   font-family: "Alata";
   src: url("./assets/fonts/Alata-Regular.ttf") format("truetype");
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
   transform: translateY(-2em);
 }
-.fade-enter-active, .face-leave-active {
-  transition: all .5s ease;
+.fade-enter-active,
+.face-leave-active {
+  transition: all 0.5s ease;
 }
 </style>
