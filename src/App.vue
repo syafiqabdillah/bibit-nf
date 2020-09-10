@@ -1,20 +1,22 @@
 <template>
   <div id="app">
     <Navbar />
-    <transition name="fade" mode="out-in">
+    <transition name="fade" mode="out-in" class="content">
       <router-view />
     </transition>
-    <Footer />
+    <div id="footer-container">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from "@/fragments/Navbar.vue";
-import Footer from "@/fragments/Footer.vue"
+import Footer from "@/fragments/Footer.vue";
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
   },
   beforeCreate() {
     if (location.protocol != "https:" && process.env.NODE_ENV == "production") {
@@ -37,6 +39,8 @@ body {
   background-color: #f3e6e3;
   min-height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 @font-face {
   font-family: "Alata";
@@ -50,5 +54,11 @@ body {
 .fade-enter-active,
 .face-leave-active {
   transition: all 0.5s ease;
+}
+.content {
+  min-height: 100%;
+}
+#footer-container {
+  margin-top: auto;
 }
 </style>
