@@ -16,7 +16,7 @@ export default {
     Navbar,
     Footer
   },
-  mounted() {
+  beforeCreate() {
     if (location.protocol != "https:" && process.env.NODE_ENV == "production") {
       location.href =
         "https:" +
