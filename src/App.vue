@@ -4,14 +4,17 @@
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from "@/fragments/Navbar.vue";
+import Footer from "@/fragments/Footer.vue"
 export default {
   components: {
     Navbar,
+    Footer
   },
   mounted() {
     if (location.protocol != "https:" && process.env.NODE_ENV == "production") {
