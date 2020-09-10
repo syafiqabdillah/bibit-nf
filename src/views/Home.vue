@@ -53,7 +53,6 @@
         v-on:click="showDetail(product)"
       >
         <ProductItem :product="product" />
-
       </b-card>
 
       <b-modal ref="popup-kontak-toko" hide-header hide-footer centered>
@@ -66,8 +65,8 @@
     <div v-if="loading">
       <b-spinner>Loading...</b-spinner>
     </div>
-    <div class="mt-4" align="center">
-      <b-button id="see-more" v-on:click="seeMore">see more</b-button>
+    <div class="mt-2 mb-4" align="center">
+      <a href="javascript:void(0);" id="see-more" v-on:click="seeMore">see more</a>
     </div>
   </div>
 </template>
@@ -82,7 +81,7 @@ export default {
   name: "Home",
   components: {
     KontakToko,
-    ProductItem
+    ProductItem,
   },
   data() {
     return {
@@ -195,8 +194,8 @@ export default {
         .then((res) => {
           this.selectedToko = res.data.data;
 
-          // update the view of this item 
-          axios.post(`${baseUrl}/add-view/${product.id}`)
+          // update the view of this item
+          axios.post(`${baseUrl}/add-view/${product.id}`);
         })
         .catch((e) => {
           alert(e);
@@ -310,8 +309,8 @@ a:visited {
   letter-spacing: 1.5px;
 }
 #see-more {
-  margin-bottom: 32px;
-  background-color: #424874;
+  color: #424874;
+  font-size: 1.0rem;
 }
 @media (max-width: 480px) {
   .jumbo {
