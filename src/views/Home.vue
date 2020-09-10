@@ -312,9 +312,13 @@ a:visited {
   color: #424874;
   font-size: 1.0rem;
 }
+#search-query {
+  font-size: 1.0rem;
+}
 @media (max-width: 480px) {
   .jumbo {
     padding: 32px;
+    padding-top: 0px;
   }
   .jumbo-title {
     font-size: 2rem;
@@ -329,6 +333,9 @@ a:visited {
     margin-top: 20px;
     margin-left: 16px;
     margin-right: 16px;
+  }
+  #search-query {
+    font-size: 0.75rem;
   }
 }
 </style>
