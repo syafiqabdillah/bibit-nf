@@ -141,4 +141,9 @@ export default {
   color: #424874;
   margin-bottom: 16px;
 }
+@media(max-width: 480px){
+  .profile-toko {
+    margin: 0px;
+  }
+}
 </style>
