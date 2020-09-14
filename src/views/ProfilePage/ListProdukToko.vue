@@ -319,4 +319,14 @@ export default {
   width: auto;
   margin-top: 8px;
 }
+@media (max-width: 480px) {
+  .product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 170px);
+    justify-content: space-around;
+    row-gap: 4px;
+    margin: 8px;
+    margin-top: 16px;
+  }
+}
 </style>

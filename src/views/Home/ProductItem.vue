@@ -101,7 +101,7 @@ export default {
   max-height: 150px;
 }
 #product-detail {
-  padding: 20px;
+  padding: 16px;
   padding-top: 10px;
 }
 </style>

@@ -328,11 +328,10 @@ a:visited {
   }
   .product-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 150px);
+    grid-template-columns: repeat(auto-fill, 170px);
     justify-content: space-around;
-    margin-top: 20px;
-    margin-left: 16px;
-    margin-right: 16px;
+    margin: 8px;
+    margin-top: 16px;
   }
   #search-query {
     font-size: 0.75rem;

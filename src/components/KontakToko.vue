@@ -15,7 +15,8 @@
       </div>
     </div>
     <hr />
-    <p>{{ toko.nama }}</p>
+    <router-link :to="'/store/' + toko.id"><p>{{ toko.nama }}</p></router-link>
+    
     <p>
       <b-icon icon="person-fill" /> {{ product.namaSeller }}
       <b-icon icon="geo-alt" /> {{ toko.alamat }}
