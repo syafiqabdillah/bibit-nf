@@ -2,7 +2,6 @@
   <div>
     <div class="jumbo">
       <h2 class="jumbo-title">
-        <b-icon class="seen-icon" icon="shop"></b-icon>
         <span class="title-nama-toko"> {{ toko.nama }}</span>
       </h2>
     </div>
@@ -26,6 +25,7 @@
 
 <script>
 import { baseUrl } from "../../config/index.js";
+import { isMobile } from "../../mixins"
 import axios from "axios";
 import StoreProfile from "./StoreProfile";
 import StoreListProduct from "./StoreListProduct";
@@ -61,6 +61,11 @@ export default {
           .finally(() => (this.loading = false));
       });
   },
+  computed: {
+    isMobileScreen() {
+      return isMobile();
+    }
+  }
 };
 </script>
 
@@ -74,5 +79,36 @@ export default {
 }
 .jumbo-title {
   font-size: 3rem;
+}
+@media (max-width: 480px) {
+  #avatar-toko {
+    height: 100px;
+  }
+  .profile-container {
+    margin: 4px;
+  }
+  .jumbo-title {
+    font-size: 2rem;
+  }
+  .title-nama-toko {
+    font-size: 1.5rem;
+  }
+  #kiri {
+    margin-bottom: 8px;
+  }
+  .add-product {
+    width: 75%;
+    margin: 8px;
+    margin-top: 32px;
+  }
+  .product-container {
+    grid-template-columns: repeat(auto-fill, 125px);
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  .profile-toko {
+    margin: 4px;
+    font-size: 1rem;
+  }
 }
 </style>

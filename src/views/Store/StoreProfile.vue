@@ -3,46 +3,52 @@
     <b-card>
       <div class="profile-toko">
         <div id="logo-toko">
-          <b-icon icon="shop" font-scale="5"></b-icon>
+          <b-icon icon="shop" :font-scale="isMobileScreen ? '2' : '4'"></b-icon>
         </div>
         <div>
           <b-form @submit="() => {}">
             <b-form-group
-              label-cols="4"
+              label-cols="3"
               label-cols-lg="3"
               label="Nama"
               label-for="profile-nama-toko"
+              :label-size="isMobileScreen? 'sm' : 'md'"
             >
               <b-form-input
                 id="profile-nama-toko"
                 v-model="profile.nama"
                 disabled
+                :size="isMobileScreen? 'sm':'md'"
               ></b-form-input>
             </b-form-group>
 
             <b-form-group
-              label-cols="4"
+              label-cols="3"
               label-cols-lg="3"
               label="Alamat"
               label-for="profile-alamat-toko"
+              :label-size="isMobileScreen? 'sm' : 'md'"
             >
               <b-form-input
                 id="profile-alamat-toko"
                 v-model="profile.alamat"
                 disabled
+                :size="isMobileScreen? 'sm':'md'"
               ></b-form-input>
             </b-form-group>
 
             <b-form-group
-              label-cols="4"
+              label-cols="3"
               label-cols-lg="3"
               label="No HP"
               label-for="profile-hp-toko"
+              :label-size="isMobileScreen? 'sm' : 'md'"
             >
               <b-form-input
                 id="profile-hp-toko"
                 v-model="profile.nohp"
                 disabled
+                :size="isMobileScreen? 'sm':'md'"
               ></b-form-input>
             </b-form-group>
 
@@ -88,6 +94,7 @@
 </template>
 
 <script>
+import { isMobile } from "../../mixins";
 export default {
   nama: "StoreProfile",
   props: {
@@ -125,6 +132,9 @@ export default {
     imageFromUrl() {
       return require(this.product.imageUrl);
     },
+    isMobileScreen() {
+      return isMobile();
+    },
   },
 };
 </script>
@@ -135,7 +145,7 @@ export default {
   margin-right: 0px;
 }
 .profile-toko {
-  margin: 32px;
+  margin: 0px;
 }
 .spinner {
   color: #c3aed6;
@@ -155,7 +165,7 @@ export default {
 .logo:hover {
   cursor: pointer;
 }
-@media(max-width: 480px) {
+@media (max-width: 480px) {
   .profile {
     margin: 8px;
   }
