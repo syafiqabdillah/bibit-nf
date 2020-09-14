@@ -13,8 +13,10 @@
               <h2 class="user-mgt-title">User Management</h2>
               <b-table :items="listUser" :fields="fieldTableUser">
               <template v-slot:cell(action)="row">
+                <div align="center">
                 <b-form-checkbox v-model="row.item.active" switch v-on:change="toggleStatusActive(row.item)">
                 </b-form-checkbox>
+                </div>
               </template>
             </b-table>
             </b-card>
@@ -107,7 +109,7 @@ export default {
       listKategori: [],
       listUser: [],
       fieldTableKategori: ["id", "nama", "action"],
-      fieldTableUser: ["nama", "email", "active", { label: "", key: 'action' }],
+      fieldTableUser: ["nama", "email", { label: "Active", key: 'action' }],
       formAddKategori: {
         nama: "",
       },
