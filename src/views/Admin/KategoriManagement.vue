@@ -63,7 +63,7 @@ export default {
   created() {
     // get kategori data
     axios
-      .get(`${baseUrl}/kategori`)
+      .get(`${baseUrl}/all-kategori`)
       .then((res) => {
         this.listKategori = res.data.data;
       })
