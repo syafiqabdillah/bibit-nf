@@ -77,8 +77,8 @@
 
 <script>
 import axios from "axios";
-import { baseUrl } from "../config/index.js";
-import { getJwtData, getCookie } from "../mixins/index.js";
+import { baseUrl } from "../../config/index.js";
+import { getJwtData, getCookie } from "../../mixins/index.js";
 export default {
   name: "Admin",
   created() {

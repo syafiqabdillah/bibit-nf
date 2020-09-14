@@ -30,7 +30,7 @@ const routes = [
   {
     path: "/bukan-admin",
     name: "Admin",
-    component: () => import("../views/Admin.vue"),
+    component: () => import("../views/Admin/Admin.vue"),
   },
   {
     path: "*",
