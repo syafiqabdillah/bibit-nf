@@ -2,6 +2,8 @@
   <div>
     <div class="jumbo">
       <h2 class="jumbo-title">
+        <b-icon font-scale="2" icon="shop"></b-icon>
+        <br />
         <span class="title-nama-toko"> {{ toko.nama }}</span>
       </h2>
     </div>
@@ -25,7 +27,7 @@
 
 <script>
 import { baseUrl } from "../../config/index.js";
-import { isMobile } from "../../mixins"
+import { isMobile } from "../../mixins";
 import axios from "axios";
 import StoreProfile from "./StoreProfile";
 import StoreListProduct from "./StoreListProduct";
@@ -33,7 +35,7 @@ export default {
   name: "Store",
   components: {
     StoreProfile,
-    StoreListProduct
+    StoreListProduct,
   },
   data() {
     return {
@@ -64,8 +66,8 @@ export default {
   computed: {
     isMobileScreen() {
       return isMobile();
-    }
-  }
+    },
+  },
 };
 </script>
 

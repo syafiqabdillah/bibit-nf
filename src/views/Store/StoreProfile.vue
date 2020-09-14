@@ -2,25 +2,8 @@
   <div class="profile">
     <b-card>
       <div class="profile-toko">
-        <div id="logo-toko">
-          <b-icon icon="shop" :font-scale="isMobileScreen ? '2' : '4'"></b-icon>
-        </div>
         <div>
           <b-form @submit="() => {}">
-            <b-form-group
-              label-cols="3"
-              label-cols-lg="3"
-              label="Nama"
-              label-for="profile-nama-toko"
-              :label-size="isMobileScreen? 'sm' : 'md'"
-            >
-              <b-form-input
-                id="profile-nama-toko"
-                v-model="profile.nama"
-                disabled
-                :size="isMobileScreen? 'sm':'md'"
-              ></b-form-input>
-            </b-form-group>
 
             <b-form-group
               label-cols="3"
@@ -51,8 +34,6 @@
                 :size="isMobileScreen? 'sm':'md'"
               ></b-form-input>
             </b-form-group>
-
-            <hr />
 
             <div class="social-media">
               <div
