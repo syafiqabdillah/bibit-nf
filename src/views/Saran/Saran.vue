@@ -20,8 +20,9 @@
                   label-for="email-penyaran"
                 >
                   <b-form-input
-                    placeholder="Email kamu..."
+                    placeholder="Email yang dapat kami hubungi..."
                     id="email-penyaran"
+                    v-model="form.email"
                   ></b-form-input>
                 </b-form-group>
                 <b-form-group
@@ -84,6 +85,7 @@ export default {
     return {
       form: {
         saran: "",
+        email: "",
         captchaIsVerified: false,
       },
       imageChoices: [
@@ -103,14 +105,17 @@ export default {
     onSubmit(e) {
       e.preventDefault();
       if (this.panjangSaranValid()) {
-        if (this.form.saran.length === 0) {
-          alert("Yah, jangan kosong dong... :(");
+        if (this.form.saran === "" || this.form.saran.length === "") {
+          alert("Tolong lengkapi formnya dong... :(");
         } else if (!this.form.captchaIsVerified) {
           alert("ARE YOU ROBOTS?!!!");
         } else {
           this.$refs["modal-loading"].show();
           axios
-            .post(`${baseUrl}/add-saran`, { teks: this.form.saran })
+            .post(`${baseUrl}/add-saran`, {
+              teks: this.form.saran,
+              email: this.form.email,
+            })
             .then(() =>
               alert(
                 "Saran kamu berhasil kami terima. Terima kasih banyak telah meluangkan waktu."
@@ -186,7 +191,8 @@ export default {
 .captcha {
   margin: 4px 0px;
 }
-#group-email, #group-saran {
+#group-email,
+#group-saran {
   margin-bottom: 4px;
 }
 @media (max-width: 480px) {
