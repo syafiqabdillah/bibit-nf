@@ -18,6 +18,9 @@
           <b-nav-item>
             <router-link to="/">Beranda</router-link>
           </b-nav-item>
+          <b-nav-item>
+            <router-link to="/saran">Saran</router-link>
+          </b-nav-item>
 
           <b-nav-item v-if="!isLoggedIn()">
             <router-link to="/register">Register</router-link>

@@ -38,6 +38,11 @@ const routes = [
     component: () => import("../views/Admin/Admin.vue"),
   },
   {
+    path: "/saran",
+    name: "Saran",
+    component: () => import("../views/Saran/Saran.vue"),
+  },
+  {
     path: "*",
     redirect: "/"
   }
