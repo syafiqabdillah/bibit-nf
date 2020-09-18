@@ -4,8 +4,8 @@
       <b-row>
         <b-col cols="12" md="12" lg="6">
           <div class="login-image">
-            <h2>Punya Saran buat Bibit?</h2>
-            <p>titip saran untuk bibit yang lebih baik</p>
+            <h2>Punya Saran Buat Bibit?</h2>
+            <p>tuliskan saran kamu untuk bibit yang lebih baik</p>
             <br />
             <img :src="imageSource" alt="Two humans" />
           </div>
@@ -14,15 +14,44 @@
           <b-card>
             <div class="form-saran">
               <b-form @submit="onSubmit" @reset="onReset">
-                <b-form-textarea
-                  placeholder="Tulis saran kamu di sini..."
-                  v-model="form.saran"
-                  rows="4"
-                  :state="form.saran.length <= 140 ? null : false"
+                <b-form-group
+                  id="group-email"
+                  label="Email"
+                  label-for="email-penyaran"
                 >
-                </b-form-textarea>
-                <div align="right">
+                  <b-form-input
+                    placeholder="Email kamu..."
+                    id="email-penyaran"
+                  ></b-form-input>
+                </b-form-group>
+                <b-form-group
+                  id="group-saran"
+                  label="Saran"
+                  label-for="saran-penyaran"
+                >
+                  <b-form-textarea
+                    placeholder="Apa yang bisa bibit perbaiki?"
+                    v-model="form.saran"
+                    rows="5"
+                    :state="panjangSaranValid() ? null : false"
+                  >
+                  </b-form-textarea>
+                </b-form-group>
+
+                <div
+                  align="right"
+                  class="mb-2"
+                  :style="
+                    form.saran.length <= 140 ? 'color:grey;' : 'color:red;'
+                  "
+                >
                   <small>{{ form.saran.length }}/140</small>
+                </div>
+                <div align="center" class="captcha">
+                  <VueRecaptcha
+                    sitekey="6LdKvM0ZAAAAALiQoJsyyQghncarLuI1FAVVt2X5"
+                    @verify="onCaptchaVerified"
+                  />
                 </div>
                 <b-button class="btn-saran" block type="submit">Kirim</b-button>
               </b-form>
@@ -44,18 +73,24 @@
 import axios from "axios";
 import { parseJwt, setCookie } from "../../mixins";
 import { baseUrl } from "../../config";
+import VueRecaptcha from "vue-recaptcha";
 
 export default {
   name: "Saran",
+  components: {
+    VueRecaptcha,
+  },
   data() {
     return {
       form: {
         saran: "",
+        captchaIsVerified: false,
       },
       imageChoices: [
         require("../../assets/img/saran1.png"),
         require("../../assets/img/saran2.png"),
       ],
+      modalText: "Mengirim...",
     };
   },
   computed: {
@@ -67,10 +102,27 @@ export default {
   methods: {
     onSubmit(e) {
       e.preventDefault();
-      if (this.form.saran.length <= 140) {
-        alert(`kirim saran: ${this.form.saran}`);
+      if (this.panjangSaranValid()) {
+        if (this.form.saran.length === 0) {
+          alert("Yah, jangan kosong dong... :(");
+        } else if (!this.form.captchaIsVerified) {
+          alert("ARE YOU ROBOTS?!!!");
+        } else {
+          this.$refs["modal-loading"].show();
+          axios
+            .post(`${baseUrl}/add-saran`, { teks: this.form.saran })
+            .then(() =>
+              alert(
+                "Saran kamu berhasil kami terima. Terima kasih banyak telah meluangkan waktu."
+              )
+            )
+            .catch(() =>
+              alert("Saran gagal terkirim. Coba beberapa menit lagi.")
+            )
+            .finally(() => location.reload());
+        }
       } else {
-        alert("karakter melebihi batas");
+        alert("Jumlah karakter melebihi batas :(");
       }
     },
     onReset() {},
@@ -83,6 +135,12 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+    },
+    panjangSaranValid() {
+      return this.form.saran.length <= 140;
+    },
+    onCaptchaVerified() {
+      this.form.captchaIsVerified = true;
     },
   },
 };
@@ -124,6 +182,12 @@ export default {
 }
 .login-image img {
   height: 180px;
+}
+.captcha {
+  margin: 4px 0px;
+}
+#group-email, #group-saran {
+  margin-bottom: 4px;
 }
 @media (max-width: 480px) {
   .login-container {
