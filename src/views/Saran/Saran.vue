@@ -161,7 +161,7 @@ export default {
   padding-bottom: 0px;
 }
 .login-container {
-  margin: 128px;
+  margin: 64px 128px;
 }
 .btn-saran {
   background-color: #424874;
@@ -186,7 +186,7 @@ export default {
   color: #424874;
 }
 .login-image img {
-  height: 180px;
+  height: 250px;
 }
 .captcha {
   margin: 4px 0px;
@@ -203,7 +203,7 @@ export default {
     margin: 4px;
   }
   .login-image img {
-    height: 150px;
+    height: 120px;
   }
 }
 .spinner {
