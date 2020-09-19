@@ -7,6 +7,10 @@ import store from "./store";
 import { BootstrapVue, IconsPlugin, BIcon } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+// social sharing 
+import VueSocialSharing from 'vue-social-sharing'
+ 
+Vue.use(VueSocialSharing);
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
