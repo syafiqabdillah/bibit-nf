@@ -83,7 +83,7 @@
                   :quote="sharing_content.text"
                 >
                   <i :class="social.icon"></i>
-                  <span>{{ social.name }}</span>
+                  <!-- <span>{{ social.name }}</span> -->
                 </ShareNetwork>
               </div>
             </div>
@@ -117,17 +117,17 @@ export default {
       socials: [
         {
           name: "Twitter",
-          icon: "fab fa-twitter mr-1",
+          icon: "fab fa-twitter",
           color: "#1da1f2",
         },
         {
           name: "Facebook",
-          icon: "fab fa-facebook-f mr-1",
+          icon: "fab fa-facebook-f",
           color: "#1877f2",
         },
         {
           name: "Whatsapp",
-          icon: "fab fa-whatsapp mr-1",
+          icon: "fab fa-whatsapp",
           color: "#2dbe60",
         },
       ],
@@ -206,10 +206,7 @@ export default {
 }
 .share-social {
   margin: 8px 0 16px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 120px);
-  row-gap: 8px;
-  column-gap: 8px;
+  display: flex;
   justify-content: center;
 }
 .share-social a {
@@ -223,5 +220,7 @@ export default {
   justify-content: space-around;
   align-items: center;
   height: 32px;
+  width: 40px;
+  margin: 0 4px;
 }
 </style>

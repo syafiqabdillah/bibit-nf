@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbo">
+    <div class="jumbo" v-if="!loading">
       <h2 class="jumbo-title">
         <b-icon font-scale="2" icon="shop"></b-icon>
         <br />
@@ -12,7 +12,7 @@
       <b-spinner class="mt-4" variant="primary"></b-spinner>
     </div>
 
-    <div class="profile-container">
+    <div class="profile-container" v-if="!loading">
       <b-row>
         <b-col cols="12" md="12" lg="5">
           <StoreProfile :profile="toko" :namaToko="toko.nama" />
@@ -52,15 +52,22 @@ export default {
       .get(`${baseUrl}/view-toko/${this.$route.params.id}`)
       .then((res) => (this.toko = res.data.data))
       .finally(() => {
-        axios
-          .get(`${baseUrl}/products/${this.$route.params.id}`)
-          .then((res) => {
-            this.listProduct = res.data.data;
-          })
-          .catch((e) => {
-            alert(e);
-          })
-          .finally(() => (this.loading = false));
+        if (this.toko.nama === "") {
+          alert("Toko tidak ditemukan. Mengalihkan ke halaman Beranda...")
+          location.href = "/";
+        } else {
+          axios
+            .get(`${baseUrl}/products/${this.$route.params.id}`)
+            .then((res) => {
+              this.listProduct = res.data.data;
+            })
+            .catch((e) => {
+              alert(e);
+            })
+            .finally(() => {
+              this.loading = false;
+            });
+        }
       });
   },
   computed: {
