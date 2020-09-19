@@ -70,15 +70,20 @@
           <div align="center">
             Bagikan ke teman melalui
             <div class="share-social">
-              <div class="share-button" :style="'background-color:'+social.color+';'" v-for="social in socials" :key="social.name">
+              <div
+                class="share-button"
+                :style="'background-color:' + social.color + ';'"
+                v-for="social in socials"
+                :key="social.name"
+              >
                 <ShareNetwork
-                :network="social.name.toLowerCase()"
-                :url="sharing_content.url"
-                :title="sharing_content.text"
-                :description="sharing_content.text"
-                :quote="sharing_content.text"
-                 >
-                <i :class="social.icon"></i>
+                  :network="social.name.toLowerCase()"
+                  :url="sharing_content.url"
+                  :title="sharing_content.text"
+                  :description="sharing_content.text"
+                  :quote="sharing_content.text"
+                >
+                  <i :class="social.icon"></i>
                   <span>{{ social.name }}</span>
                 </ShareNetwork>
               </div>
@@ -97,6 +102,7 @@ export default {
   nama: "StoreProfile",
   props: {
     profile: Object,
+    namaToko: String,
   },
   components: {},
   data() {
@@ -112,27 +118,20 @@ export default {
       socials: [
         {
           name: "Twitter",
-          url: "",
           icon: "fab fa-twitter mr-1",
           color: "#1da1f2",
         },
         {
           name: "Facebook",
-          url: "",
           icon: "fab fa-facebook-f mr-1",
           color: "#1877f2",
         },
         {
           name: "Whatsapp",
-          url: "",
           icon: "fab fa-whatsapp mr-1",
           color: "#2dbe60",
         },
       ],
-      sharing_content: {
-        url: `https://www.bibit-asysyaamil.online/store/${this.$route.params.id}`,
-        text: `Yuk mampir ke toko "${this.profile.nama}" :D`,
-      },
     };
   },
   methods: {
@@ -157,6 +156,12 @@ export default {
     },
     isMobileScreen() {
       return isMobile();
+    },
+    sharing_content() {
+      return {
+        url: `https://www.bibit-asysyaamil.online/store/${this.$route.params.id}`,
+        text: `Yuk mampir ke toko \"${this.profile.nama}\" :D`,
+      };
     },
   },
 };
@@ -201,7 +206,7 @@ export default {
   text-align: center;
 }
 .share-social {
-  margin: 16px 0;
+  margin: 8px 0 16px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 120px);
   row-gap: 8px;

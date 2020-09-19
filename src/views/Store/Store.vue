@@ -15,7 +15,7 @@
     <div class="profile-container">
       <b-row>
         <b-col cols="12" md="12" lg="5">
-          <StoreProfile :profile="toko" />
+          <StoreProfile :profile="toko" :namaToko="toko.nama" />
         </b-col>
         <b-col cols="12" md="12" lg="7">
           <StoreListProduct :listProduct="listProduct" />
