@@ -80,7 +80,6 @@
                   :network="social.name.toLowerCase()"
                   :url="sharing_content.url"
                   :title="sharing_content.text"
-                  :description="sharing_content.text"
                   :quote="sharing_content.text"
                 >
                   <i :class="social.icon"></i>
