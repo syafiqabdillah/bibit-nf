@@ -81,7 +81,7 @@ export default {
 
 <style scoped>
 #nav {
-  background-color: #132743;
+  background-color: #424874;
   color: white;
 }
 #nav a {
