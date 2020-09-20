@@ -99,7 +99,7 @@
               </b-input-group>
             </b-form-group>
 
-            <b-button class="btn-update" block type="submit"
+            <b-button class="btn-update bibit-btn-small" block type="submit"
               >Update Toko</b-button
             >
           </b-form>
@@ -126,6 +126,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+@import '../../assets/css/style.css';
+
 #kiri {
   margin-bottom: 16px;
 }
@@ -137,20 +139,9 @@ export default {
   margin-bottom: 20px;
 }
 .btn-update {
-  background-color: #424874;
-  color: white;
   margin-top: 8px;
-  border: 0px;
 }
-.btn-update:hover {
-  background-color: #e11d74;
-}
-.btn-update:active {
-  background-color: #424874;
-}
-.spinner {
-  color: #c3aed6;
-}
+
 #logo-toko {
   color: #424874;
   margin-bottom: 16px;

@@ -70,7 +70,7 @@
 
     <b-modal ref="loading" centered hide-header hide-footer>
       <div align="center">
-        <b-spinner></b-spinner>
+        <b-spinner class="bibit-spinner"></b-spinner>
         Loading...
       </div>
     </b-modal>

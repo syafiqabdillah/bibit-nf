@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div class="bibit-nav">
     <b-navbar class="navbar" toggleable="sm" type="dark">
       <b-navbar-brand>{{ navBrand }}</b-navbar-brand>
 
@@ -13,7 +13,9 @@
             <router-link to="/profile">Halo, {{ nama }}</router-link>
           </b-nav-item>
 
-          <b-nav-item id="divider" v-if="isLoggedIn() && !isMobileSreen">|</b-nav-item>
+          <b-nav-item id="divider" v-if="isLoggedIn() && !isMobileSreen"
+            >|</b-nav-item
+          >
 
           <b-nav-item>
             <router-link to="/">Beranda</router-link>
@@ -46,8 +48,10 @@ import {
   parseJwt,
   setCookie,
   isLoggedIn,
-  isMobile
-} from "../mixins/index";
+  isMobile,
+} from "../mixins";
+import { colorPalette } from "../config";
+
 export default {
   name: "Navbar",
   computed: {
@@ -58,14 +62,17 @@ export default {
     },
     navBrand() {
       const path = this.$route.path;
-      if (path.includes("login") || path.includes("register")) {
+      if (path.includes("login") || path.includes("register") || path.includes("saran")) {
         return path.charAt(1).toUpperCase() + path.slice(2);
       }
       return "";
     },
     isMobileSreen() {
       return isMobile();
-    }
+    },
+    colors() {
+      return colorPalette;
+    },
   },
   methods: {
     logout() {
@@ -80,6 +87,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../assets/css/style.css';
+
 #nav {
   background-color: #424874;
   color: white;

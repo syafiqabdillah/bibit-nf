@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbo" v-if="!loading">
+    <div class="jumbo bibit-primary" v-if="!loading">
       <h2 class="jumbo-title">
         <b-icon font-scale="2" icon="shop"></b-icon>
         <br />
@@ -9,7 +9,7 @@
     </div>
 
     <div v-if="loading" align="center">
-      <b-spinner class="mt-4" variant="primary"></b-spinner>
+      <b-spinner class="bibit-spinner mt-4" variant="primary"></b-spinner>
     </div>
 
     <div class="profile-container" v-if="!loading">
@@ -53,7 +53,7 @@ export default {
       .then((res) => (this.toko = res.data.data))
       .finally(() => {
         if (this.toko.nama === "") {
-          alert("Toko tidak ditemukan. Mengalihkan ke halaman Beranda...")
+          alert("Toko tidak ditemukan. Mengalihkan ke halaman Beranda...");
           location.href = "/";
         } else {
           axios
@@ -79,9 +79,10 @@ export default {
 </script>
 
 <style scoped>
+@import "../../assets/css/style.css";
+
 /* Header */
 .jumbo {
-  background-color: #424874;
   padding-bottom: 16px;
   padding-top: 16px;
   color: white;

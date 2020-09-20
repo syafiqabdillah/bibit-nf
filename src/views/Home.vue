@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <div class="jumbo">
+    <div class="bibit-primary jumbo">
       <h1 class="jumbo-title">
         <b-icon class="title-icon" icon="cart3"></b-icon>Bantuin Bisnis Teman
       </h1>
       <p class="jumbo-nama-komunitas">
-        -Keluarga Besar Asy Syaamil & DHBS Bontang-
+        -Keluarga Besar SMAIT Nurul Fikri Depok-
       </p>
       <p class="jumbo-subtitle">
         Kalau bisa beli lewat teman sendiri, kenapa nggak?
@@ -22,14 +22,14 @@
         <span v-for="category in computedCategoryList" :key="category.id">
           <a
             v-if="selectedCategory === category.id"
-            class="selected-category"
+            class="bibit-selected-link category"
             v-on:click="searchByCategory(category.id)"
             >{{ category.nama }}</a
           >
 
           <a
             v-else
-            class="category"
+            class="bibit-link category"
             v-on:click="searchByCategory(category.id)"
             >{{ category.nama }}</a
           >
@@ -63,10 +63,12 @@
     </div>
 
     <div v-if="loading">
-      <b-spinner>Loading...</b-spinner>
+      <b-spinner class="bibit-spinner">Loading...</b-spinner>
     </div>
     <div class="mt-2 mb-4" align="center">
-      <a href="javascript:void(0);" id="see-more" v-on:click="seeMore">see more</a>
+      <a href="javascript:void(0);" class="bibit-link-dark" id="see-more" v-on:click="seeMore"
+        >see more</a
+      >
     </div>
   </div>
 </template>
@@ -75,7 +77,7 @@
 import KontakToko from "@/components/KontakToko.vue";
 import ProductItem from "./Home/ProductItem";
 import axios from "axios";
-import { baseUrl } from "../config/index.js";
+import { baseUrl, colorPalette } from "../config/index.js";
 
 export default {
   name: "Home",
@@ -182,6 +184,9 @@ export default {
       newList = newList.concat(this.categoryList);
       return newList;
     },
+    colors() {
+      return colorPalette;
+    },
   },
   methods: {
     showDetail(product) {
@@ -236,6 +241,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+@import "../assets/css/style.css";
 .empty-product {
   text-align: center;
   margin-top: 32px;
@@ -263,30 +269,15 @@ export default {
   flex-wrap: wrap;
   margin-top: 8px;
 }
-.category,
-.selected-category {
+.category {
   margin-right: 12px;
   font-size: 12px;
   font-weight: 200;
   letter-spacing: 0.5px;
-  color: #c3aed6;
 }
-.selected-category {
-  color: white;
-}
-.category:hover {
-  color: #dea5a4;
-  cursor: pointer;
-}
-a:link {
-  color: white;
-}
-a:visited {
-  color: white;
-}
+
 /* Header */
 .jumbo {
-  background-color: #424874;
   padding-left: 128px;
   padding-right: 128px;
   padding-top: 16px;
@@ -309,11 +300,10 @@ a:visited {
   letter-spacing: 1.5px;
 }
 #see-more {
-  color: #424874;
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 #search-query {
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 @media (max-width: 480px) {
   .jumbo {

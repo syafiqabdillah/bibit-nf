@@ -3,7 +3,7 @@
     <div class="login-container">
       <b-row>
         <b-col cols="12" md="12" lg="6">
-          <div class="login-image">
+          <div class="login-image bibit-text-dark">
             <h2>Punya Saran Buat Bibit?</h2>
             <p>tuliskan saran kamu untuk bibit yang lebih baik</p>
             <br />
@@ -54,7 +54,9 @@
                     @verify="onCaptchaVerified"
                   />
                 </div>
-                <b-button class="btn-saran" block type="submit">Kirim</b-button>
+                <b-button class="btn-saran bibit-btn" block type="submit"
+                  >Kirim</b-button
+                >
               </b-form>
             </div>
           </b-card>
@@ -64,7 +66,7 @@
 
     <b-modal ref="modal-loading" centered hide-footer hide-header>
       <div align="center">
-        <b-spinner label="Spinning" class="spinner"></b-spinner>
+        <b-spinner class="bibit-spinner" label="Spinning"></b-spinner>
       </div>
     </b-modal>
   </div>
@@ -152,6 +154,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+@import "../../assets/css/style.css";
+
 .title {
   margin: 32px;
 }
@@ -164,26 +168,18 @@ export default {
   margin: 64px 128px;
 }
 .btn-saran {
-  background-color: #424874;
-  border: 0;
   margin-top: 16px;
   margin-bottom: 16px;
-  font-size: 1.5rem;
 }
-.btn-saran:hover {
-  background-color: #8675a9;
-}
+
 .register-now {
   text-align: center;
   font-size: 14px;
 }
-.register-now a {
-  color: #424874;
-}
+
 .login-image {
   padding-top: 16px;
   padding-bottom: 16px;
-  color: #424874;
 }
 .login-image img {
   height: 250px;
@@ -206,7 +202,5 @@ export default {
     height: 120px;
   }
 }
-.spinner {
-  color: #c3aed6;
-}
+
 </style>

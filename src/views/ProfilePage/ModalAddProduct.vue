@@ -1,7 +1,11 @@
 <template>
   <div>
     <div align="center">
-      <b-button class="add-product" block v-on:click="showFormAddProduct()">
+      <b-button
+        class="add-product bibit-btn-small"
+        block
+        v-on:click="showFormAddProduct()"
+      >
         <b-icon class="add-product-icon" icon="plus"></b-icon>Tambah Produk
       </b-button>
     </div>
@@ -86,7 +90,7 @@
 
     <b-modal ref="modal-uploading" centered hide-header hide-footer>
       <div align="center">
-        <b-spinner class="spinner">{{ uploadProgress.state }}</b-spinner>
+        <b-spinner class="bibit-spinner">{{ uploadProgress.state }}</b-spinner>
         <p v-if="uploadProgress.state === 'Uploading Image'">
           Uploaded {{ uploadProgress.percentage }}%
         </p>
@@ -219,18 +223,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.add-product,
-.add-product:active,
-.add-product:active,
-.add-product:focus {
+@import "../../assets/css/style.css";
+
+.add-product {
   width: 50%;
-  background-color: #424874;
-  color: white;
   margin-top: 32px;
-  border: 0px;
-}
-.add-product:hover {
-  background-color: #e11d74;
 }
 #image-preview {
   display: flex;

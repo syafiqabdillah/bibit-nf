@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <div class="jumbo">
+    <div class="jumbo bibit-primary">
       <h2 class="jumbo-title">
         <b-icon class="seen-icon" icon="shop"></b-icon>
         Profil Toko <br />
@@ -16,26 +16,30 @@
 
         <b-col cols="12" md="7" lg="7">
           <div v-if="loading" align="center">
-            <b-spinner variant="primary"></b-spinner>
+            <b-spinner class="bibit-spinner"></b-spinner>
           </div>
-          <ListProdukToko v-if="!loading" :listProduct="listProduct" :profile="profile" />
+          <ListProdukToko
+            v-if="!loading"
+            :listProduct="listProduct"
+            :profile="profile"
+          />
         </b-col>
       </b-row>
     </div>
 
     <b-modal ref="update-toko" centered hide-header hide-footer>
       <div align="center">
-        <b-spinner class="spinner">Update Toko...</b-spinner>
+        <b-spinner class="bibit-spinner">Update Toko...</b-spinner>
       </div>
     </b-modal>
   </div>
 </template>
 
 <script>
-import { isLoggedIn, getCookie, parseJwt } from "../mixins/index";
-import { baseUrl } from "../config/index.js";
-import ProfileToko from "./ProfilePage/ProfileToko";
-import ListProdukToko from "./ProfilePage/ListProdukToko";
+import { isLoggedIn, getCookie, parseJwt } from "../../mixins";
+import { baseUrl } from "../../config";
+import ProfileToko from "./ProfileToko";
+import ListProdukToko from "./ListProdukToko";
 import axios from "axios";
 
 export default {
@@ -116,6 +120,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+@import "../../assets/css/style.css";
 .profile-container {
   margin: 32px;
 }
@@ -123,7 +128,6 @@ export default {
 
 /* Header */
 .jumbo {
-  background-color: #424874;
   padding-bottom: 16px;
   padding-top: 16px;
   color: white;

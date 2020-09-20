@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="bibit-bg">
     <Navbar />
     <transition name="fade" mode="out-in" class="content">
       <router-view />
@@ -29,6 +29,8 @@ export default {
 </script>
 
 <style>
+@import './assets/css/style.css';
+
 html,
 body {
   height: 100%;
@@ -36,7 +38,6 @@ body {
 #app {
   text-align: center;
   font-family: "Alata", Helvetica, Arial;
-  background-color: #f3e6e3;
   min-height: 100%;
   overflow: hidden;
   display: flex;

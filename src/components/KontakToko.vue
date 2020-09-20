@@ -15,7 +15,7 @@
       </div>
     </div>
     <hr />
-    <router-link :to="'/store/' + toko.id"><p>{{ toko.nama }}</p></router-link>
+    <router-link class="bibit-link" :to="'/store/' + toko.id"><p>{{ toko.nama }}</p></router-link>
     
     <p>
       <b-icon icon="person-fill" /> {{ product.namaSeller }}
@@ -58,6 +58,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "KontakToko",
   data() {
@@ -107,6 +108,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+@import '../assets/css/style.css';
+
 .social-media {
   display: flex;
   justify-content: space-around;

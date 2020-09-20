@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="footer" :style="'background-color:' + colors.primary">
     <div id="copyright">
       © 2020, Bantuin Bisnis Teman.
     </div>
@@ -10,8 +10,14 @@
 </template>
 
 <script>
+import { colorPalette } from "../config"
 export default {
   name: "Footer",
+  computed: {
+    colors() {
+      return colorPalette
+    }
+  }
 };
 // f3e6e3
 </script>

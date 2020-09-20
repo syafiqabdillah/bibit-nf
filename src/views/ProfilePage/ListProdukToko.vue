@@ -109,7 +109,7 @@
 
     <b-modal ref="modal-uploading" centered hide-header hide-footer>
       <div align="center">
-        <b-spinner class="spinner">{{ uploadProgress.state }}</b-spinner>
+        <b-spinner class="bibit-spinner">{{ uploadProgress.state }}</b-spinner>
         <p v-if="uploadProgress.state === 'Uploading Image'">
           Uploaded {{ uploadProgress.percentage }}%
         </p>
@@ -246,6 +246,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+@import '../../assets/css/style.css';
+
 .product-item {
   margin-bottom: 20px;
 }

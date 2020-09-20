@@ -3,7 +3,7 @@
     <div class="login-container">
       <b-row>
         <b-col cols="12" md="12" lg="6">
-          <div class="login-image">
+          <div class="login-image bibit-text-dark">
             <h2>Bantuin Bisnis Teman</h2>
             <p>Kalau bisa beli lewat teman sendiri, kenapa nggak?</p>
             <img :src="imageSource" alt="One person" />
@@ -43,7 +43,11 @@
                     placeholder="Your email"
                   ></b-form-input>
                   <b-form-invalid-feedback>
-                    {{ !emailAvailable ? 'Email sudah terdaftar' : 'Email tidak valid'}}
+                    {{
+                      !emailAvailable
+                        ? "Email sudah terdaftar"
+                        : "Email tidak valid"
+                    }}
                   </b-form-invalid-feedback>
                 </b-form-group>
 
@@ -86,12 +90,14 @@
                   </b-form-invalid-feedback>
                 </b-form-group>
 
-                <b-button class="btn-login" block type="submit"
+                <b-button class="btn-login bibit-btn" block type="submit"
                   >Register</b-button
                 >
               </b-form>
               <div class="login-now">
-                <a href="/login">Sudah punya akun? Login sekarang</a>
+                <a class="bibit-link-dark" href="/login"
+                  >Sudah punya akun? Login sekarang</a
+                >
               </div>
             </div>
           </b-card>
@@ -101,7 +107,7 @@
 
     <b-modal ref="modal-loading" centered hide-footer hide-header>
       <div align="center">
-        <b-spinner label="Spinning" class="spinner"></b-spinner>
+        <b-spinner label="Spinning" class="bibit-spinner"></b-spinner>
       </div>
     </b-modal>
   </div>
@@ -135,7 +141,7 @@ export default {
     };
   },
   watch: {
-    'form.email': function () {
+    "form.email": function() {
       if (!this.awaitingEmailType) {
         setTimeout(() => {
           axios
@@ -143,10 +149,10 @@ export default {
               email: this.form.email,
             })
             .then((res) => {
-              console.log(`email available ${res.data.email_available}`)
+              console.log(`email available ${res.data.email_available}`);
               this.emailAvailable = res.data.email_available;
             });
-          this.awaitingEmailType = false
+          this.awaitingEmailType = false;
         }, 1000);
       }
       this.awaitingEmailType = true;
@@ -240,18 +246,12 @@ export default {
   padding: 16px;
 }
 .btn-login {
-  background-color: #424874;
-  border: 0;
   margin-top: 32px;
   margin-bottom: 16px;
-  font-size: 1.5rem;
 }
-.btn-login:hover {
-  background-color: #8675a9;
-}
+
 .login-image {
   padding: 24px;
-  color: #424874;
 }
 .login-image img {
   height: 300px;
@@ -268,14 +268,9 @@ export default {
     height: 150px;
   }
 }
-.spinner {
-  color: #c3aed6;
-}
+
 .login-now {
   text-align: center;
   font-size: 14px;
-}
-.login-now a {
-  color: #424874;
 }
 </style>
